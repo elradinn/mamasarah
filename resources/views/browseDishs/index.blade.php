@@ -63,7 +63,7 @@
               <td class="text-center">
                 <a class="btn btn-sm btn-secondary" href="/browseDishs/{{$browseDish->id}}" title="View"><i
                     class="fa fa-eye"></i></a>
-                <a class="btn btn-sm btn-primary" href="/browseDishs/{{$browseDish->id}}" title="View">Add to Cart</a>
+                <button class="btn btn-sm btn-primary" href="#" title="View">Add to Cart</button>
               </td>
             </tr>
             @endforeach
