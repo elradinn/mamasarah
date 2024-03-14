@@ -3,16 +3,19 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <for method="post" action="/dishs/{{$dish->id}}?ref={{urlencode($ref)}}" enctype="multipart/form-data">
+      <form method="post" action="/dishs/{{$dish->id}}?ref={{urlencode($ref)}}" enctype="multipart/form-data">
         @method("PATCH")
         @csrf
         <div class="row">
           <div class="form-group col-md-6 col-lg-4">
-            <label for="dish_id">Id</label>
-            <input readonly id="dish_id" name="id" class="form-control form-control-sm" value="{{old('id', $dish->id)}}"
-              type="number" required />
-            @error('id')<span class="text-danger">{{$message}}</span>@enderror
+            <label for="dish_image">Image</label>
+            <input type="file" id="dish_image" name="image" class="form-control form-control-sm" maxlength="50" />
+            <a href="/storage/dishs/{{old('image', $dish->image)}}" target="_blank"
+              title="{{old('image', $dish->image)}}"><img class="img-item"
+                src="/storage/dishs/{{old('image', $dish->image)}}" /></a>
+            @error('image')<span class="text-danger">{{$message}}</span>@enderror
           </div>
+          <input type="hidden" id="dish_id" name="id" value="{{old('id', $dish->id)}}" />
           <div class="form-group col-md-6 col-lg-4">
             <label for="dish_name">Name</label>
             <input id="dish_name" name="name" class="form-control form-control-sm" value="{{old('name', $dish->name)}}"
@@ -37,19 +40,17 @@
             @error('category_id')<span class="text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group col-md-6 col-lg-4">
-            <label for="dish_image">Image</label>
-            <input type="file" id="dish_image" name="image" class="form-control form-control-sm" maxlength="50" />
-            <a href="/storage/dishs/{{old('image', $dish->image)}}" target="_blank"
-              title="{{old('image', $dish->image)}}"><img class="img-item"
-                src="/storage/dishs/{{old('image', $dish->image)}}" /></a>
-            @error('image')<span class="text-danger">{{$message}}</span>@enderror
+            <label for="dish_description">Description</label>
+            <input id="dish_description" name="description" class="form-control form-control-sm"
+              value="{{old('description', $dish->description)}}" maxlength="50" />
+            @error('description')<span class="text-danger">{{$message}}</span>@enderror
           </div>
           <div class="col-12">
             <a class="btn btn-sm btn-secondary" href="{{$ref}}">Cancel</a>
             <button class="btn btn-sm btn-primary">Submit</button>
           </div>
         </div>
-      </for m>
+      </form>
     </div>
   </div>
 </div>

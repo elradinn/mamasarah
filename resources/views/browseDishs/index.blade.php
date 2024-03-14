@@ -41,13 +41,16 @@
         <table class="table table-sm table-striped table-hover">
           <thead>
             <tr>
-              <th class="@getSortClass(Dish.image) d-none d-md-table-cell"><a
-                  href="@getLink(sort,browseDishs,Dish.image)">Image</a></th>
-              <th class="@getSortClass(Dish.name)"><a href="@getLink(sort,browseDishs,Dish.name)">Name</a>
+              <th class="@getSortClass(BrowseDish.image) d-none d-md-table-cell"><a
+                  href="@getLink(sort,browseDishs,BrowseDish.image)">Image</a></th>
+              <th class="@getSortClass(BrowseDish.name)"><a href="@getLink(sort,browseDishs,BrowseDish.name)">Name</a>
               </th>
-              <th class="@getSortClass(Dish.price)"><a href="@getLink(sort,browseDishs,Dish.price)">Price</a></th>
+              <th class="@getSortClass(BrowseDish.price)"><a
+                  href="@getLink(sort,browseDishs,BrowseDish.price)">Price</a></th>
               <th class="@getSortClass(Category.name,asc)"><a
-                  href="@getLink(sort,browseDishs,Category.name,asc)">Category Name</a></th>
+                  href="@getLink(sort,browseDishs,Category.name,asc)">Category</a></th>
+              <th class="@getSortClass(BrowseDish.description)"><a
+                  href="@getLink(sort,browseDishs,BrowseDish.description)">Description</a></th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -60,6 +63,7 @@
               <td>{{$browseDish->name}}</td>
               <td class="text-right">{{$browseDish->price}}</td>
               <td>{{$browseDish->category_name}}</td>
+              <td>{{$browseDish->description}}</td>
               <td class="text-center">
                 <a class="btn btn-sm btn-secondary" href="/browseDishs/{{$browseDish->id}}" title="View"><i
                     class="fa fa-eye"></i></a>

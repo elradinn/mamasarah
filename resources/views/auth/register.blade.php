@@ -36,7 +36,7 @@
                   </div>
                   <div class="col-12">
                     <button class="btn btn-sm btn-secondary btn-block">Register</button>
-                    <a href="/login">Already have account? Login in.</a>
+                    <a href="/login">Already have account? Login.</a>
                   </div>
                 </div>
               </form>

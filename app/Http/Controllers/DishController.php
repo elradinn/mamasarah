@@ -13,12 +13,12 @@ class DishController extends Controller {
     public function index()
     {
         $size = request()->input('size') ? request()->input('size') : 10;
-        $sort = request()->input('sort') ? request()->input('sort') : 'Dish.id';
+        $sort = request()->input('sort') ? request()->input('sort') : 'Category.name';
         $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'asc';
         $column = request()->input('sc');
         $query = Dish::query()
             ->leftjoin('Category', 'Dish.category_id', 'Category.id')
-            ->select('Dish.id', 'Dish.image', 'Dish.name', 'Dish.price', 'Category.name as category_name')
+            ->select('Dish.image', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description', 'Dish.id')
             ->orderBy($sort, $sortDirection);
         if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
             abort(403);
@@ -47,17 +47,19 @@ class DishController extends Controller {
     {
         Util::setRef();
         $this->validate(request(), [
+            'image' => 'required|max:50',
             'name' => 'unique:Dish,name|required|max:50',
             'price' => 'required|max:12,2',
             'category_id' => 'required',
-            'image' => 'required|max:5000'
+            'description' => 'max:50'
         ]);
         $image = Util::getFile('dishs', request()->file('image'));
         Dish::create([
+            'image' => $image,
             'name' => request()->input('name'),
             'price' => request()->input('price'),
             'category_id' => request()->input('category_id'),
-            'image' => $image
+            'description' => request()->input('description')
         ]);
         return redirect(request()->query->get('ref'));
     }
@@ -65,8 +67,7 @@ class DishController extends Controller {
     public function show($id)
     {
         $dish = Dish::query()
-            ->leftjoin('Category', 'Dish.category_id', 'Category.id')
-            ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description')
+            ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Dish.category_id', 'Dish.description')
             ->where('Dish.id', $id)
             ->first();
         return view('dishs.show', ['dish' => $dish, 'ref' => Util::getRef('/dishs')]);
@@ -75,7 +76,7 @@ class DishController extends Controller {
     public function edit($id)
     {
         $dish = Dish::query()
-            ->select('Dish.id', 'Dish.name', 'Dish.price', 'Dish.category_id', 'Dish.image')
+            ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Dish.category_id', 'Dish.description')
             ->where('Dish.id', $id)
             ->first();
         $categories = DB::table('Category')
@@ -88,18 +89,20 @@ class DishController extends Controller {
     {
         Util::setRef();
         $this->validate(request(), [
+            'image' => 'max:5000',
             'name' => 'required|max:50',
             'price' => 'required|max:12,2',
             'category_id' => 'required',
-            'image' => 'max:50'
+            'description' => 'max:50'
         ]);
         $dish = Dish::find($id);
         $image = Util::getFile('dishs', request()->file('image')) ?? $dish->image;
         Dish::find($id)->update([
+            'image' => $image,
             'name' => request()->input('name'),
             'price' => request()->input('price'),
             'category_id' => request()->input('category_id'),
-            'image' => $image
+            'description' => request()->input('description')
         ]);
         return redirect(request()->query->get('ref'));
     }

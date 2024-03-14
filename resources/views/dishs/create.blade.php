@@ -7,6 +7,12 @@
         @csrf
         <div class="row">
           <div class="form-group col-md-6 col-lg-4">
+            <label for="dish_image">Image</label>
+            <input type="file" id="dish_image" name="image" class="form-control form-control-sm" required
+              maxlength="50" />
+            @error('image')<span class="text-danger">{{$message}}</span>@enderror
+          </div>
+          <div class="form-group col-md-6 col-lg-4">
             <label for="dish_name">Name</label>
             <input id="dish_name" name="name" class="form-control form-control-sm" value="{{old('name')}}" required
               maxlength="50" />
@@ -29,10 +35,10 @@
             @error('category_id')<span class="text-danger">{{$message}}</span>@enderror
           </div>
           <div class="form-group col-md-6 col-lg-4">
-            <label for="dish_image">Image</label>
-            <input type="file" id="dish_image" name="image" class="form-control form-control-sm" required
-              maxlength="50" />
-            @error('image')<span class="text-danger">{{$message}}</span>@enderror
+            <label for="dish_description">Description</label>
+            <input id="dish_description" name="description" class="form-control form-control-sm"
+              value="{{old('description')}}" maxlength="50" />
+            @error('description')<span class="text-danger">{{$message}}</span>@enderror
           </div>
           <div class="col-12">
             <a class="btn btn-sm btn-secondary" href="{{$ref}}">Cancel</a>
@@ -42,6 +48,7 @@
       </form>
     </div>
   </div>
+
 </div>
 <script>
 initPage(true)
