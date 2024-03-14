@@ -63,7 +63,10 @@
               <td class="text-center">
                 <a class="btn btn-sm btn-secondary" href="/browseDishs/{{$browseDish->id}}" title="View"><i
                     class="fa fa-eye"></i></a>
-                <button class="btn btn-sm btn-primary" href="#" title="View">Add to Cart</button>
+                <form action="{{ route('cart.add') }}" method="POST">
+                  @csrf
+                  <button class="btn btn-sm btn-primary" type="submit">Add to Cart</button>
+                </form>
               </td>
             </tr>
             @endforeach

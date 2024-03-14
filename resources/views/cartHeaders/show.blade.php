@@ -3,7 +3,6 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      @if($cartHeader)
       <div>
         <div class="row">
           <div class="form-group col-md-6 col-lg-4">
@@ -65,11 +64,9 @@
           </div>
         </div>
       </div>
-      @else
       <div>
         <h1>Your cart is empty!</h1>
       </div>
-      @endif
     </div>
   </div>
 </div>

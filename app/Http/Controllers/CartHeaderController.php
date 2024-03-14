@@ -39,20 +39,16 @@ class CartHeaderController extends Controller {
     {
         $id = Auth::id();
 
-        if ($id == null) {
-            return view('cartHeaders.emptycart');
-        }
-
         $cartHeader = CartHeader::query()
             ->leftjoin('UserAccount', 'CartHeader.user_id', 'UserAccount.id')
             ->select('CartHeader.id', 'CartHeader.user_id', 'UserAccount.name as user_account_name')
-            ->where('CartHeader.id', $id)
+            ->where('CartHeader.user_id', $id)
             ->first();
         $cartHeaderCartDetails = DB::table('CartHeader')
             ->join('CartDetail', 'CartHeader.id', 'CartDetail.cart_id')
             ->join('Dish', 'CartDetail.dish_id', 'Dish.id')
             ->select('Dish.image as dish_image', 'Dish.name as dish_name', 'CartDetail.qty', 'Dish.price as dish_price', 'CartDetail.id')
-            ->where('CartHeader.id', $id)
+            ->where('CartHeader.user_id', $id)
             ->get();
         return view('cartHeaders.show', ['cartHeader' => $cartHeader, 'ref' => Util::getRef('/cartHeaders'), 'cartHeaderCartDetails' => $cartHeaderCartDetails]);
     }

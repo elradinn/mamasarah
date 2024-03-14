@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\UserAccount;
 use App\Models\UserRole;
+use App\Models\CartHeader;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +44,11 @@ class RegisterController extends Controller
         UserRole::create([
             'user_id' => $user->id,
             'role_id' => 2
+        ]);
+
+        CartHeader::create([
+            'id' => $user->id,
+            'user_id' => $user->id
         ]);
 
         return redirect('/login');

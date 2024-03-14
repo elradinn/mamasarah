@@ -17,6 +17,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', [ SystemController::class, 'home' ]);
     Route::get('/profile', [ SystemController::class, 'profile' ]);
     Route::post('/updateProfile', [ SystemController::class, 'updateProfile' ]);
+    Route::post('/add-to-cart', [BrowseDishController::class, 'addToCart'])->name('cart.add');
     Route::middleware('role:ADMIN')->resource('/userAccounts', UserAccountController::class);
     Route::middleware('role:ADMIN')->resource('/orderHeaders', OrderHeaderController::class);
     Route::middleware('role:ADMIN')->resource('/orderDetails', OrderDetailController::class);

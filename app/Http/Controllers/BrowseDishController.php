@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Util;
 use App\Models\Dish;
+use App\Models\CartHeader;
+use App\Models\CartDetail;
+use Illuminate\Http\Request;
 
 class BrowseDishController extends Controller {
 
@@ -43,5 +46,14 @@ class BrowseDishController extends Controller {
             ->where('Dish.id', $id)
             ->first();
         return view('browseDishs.show', ['browseDish' => $browseDish, 'ref' => Util::getRef('/browseDishs')]);
+    }
+
+    public function addToCart(Request $request) {
+        $cardHeader = CartHeader::create([
+            'id' => Auth::id(),
+            'user_id' => Auth::id()
+        ]);
+
+        return redirect('/cartHeaders');
     }
 }
