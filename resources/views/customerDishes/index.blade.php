@@ -33,7 +33,7 @@
               class="form-control form-control-sm" />
           </div>
           <div class="col">
-            <button class="btn btn-primary btn-sm" onclick="search()">Search</button>
+            <button class="btn btn-success btn-sm" onclick="search()">Search</button>
             <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
           </div>
         </div>
@@ -104,9 +104,9 @@
                 </select>
               </label> of <span>{{$dishs->lastPage()}}</span>
               <div class="btn-group">
-                <a class="btn btn-primary btn-sm{{$dishs->currentPage() <= 1 ? ' disabled' : ''}}"
+                <a class="btn btn-success btn-sm{{$dishs->currentPage() <= 1 ? ' disabled' : ''}}"
                   href="@getLink(page,dishs,$dishs->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
-                <a class="btn btn-primary btn-sm{{$dishs->currentPage() >= $dishs->lastPage() ? ' disabled' : ''}}"
+                <a class="btn btn-success btn-sm{{$dishs->currentPage() >= $dishs->lastPage() ? ' disabled' : ''}}"
                   href="@getLink(page,dishs,$dishs->currentPage()+1)"><i class="fa fa-chevron-right"></i></a>
               </div>
             </div>

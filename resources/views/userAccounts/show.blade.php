@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-12">
                         <a class="btn btn-sm btn-secondary" href="{{$ref}}">Back</a>
-                        <a class="btn btn-sm btn-primary" href="/userAccounts/{{$userAccount->id}}/edit?ref={{urlencode($ref)}}">Edit</a>
+                        <a class="btn btn-sm btn-success" href="/userAccounts/{{$userAccount->id}}/edit?ref={{urlencode($ref)}}">Edit</a>
                     </div>
                 </div>
             </div>

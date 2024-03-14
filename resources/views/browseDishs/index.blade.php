@@ -34,7 +34,7 @@
               class="form-control form-control-sm" />
           </div>
           <div class="col">
-            <button class="btn btn-primary btn-sm" onclick="search()">Search</button>
+            <button class="btn btn-success btn-sm" onclick="search()">Search</button>
             <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
           </div>
         </div> -->
@@ -70,7 +70,7 @@
                 <form action="{{ route('cart.add') }}" method="POST">
                   @csrf
                   <input type="hidden" name="dish_id" value="{{$browseDish->id}}" />
-                  <button class="btn btn-sm btn-primary" type="submit">Add to Cart</button>
+                  <button class="btn btn-sm btn-success" type="submit">Add to Cart</button>
                 </form>
               </td>
             </tr>
@@ -114,9 +114,9 @@
                 </select>
               </label> of <span>{{$browseDishs->lastPage()}}</span>
               <div class="btn-group">
-                <a class="btn btn-primary btn-sm{{$browseDishs->currentPage() <= 1 ? ' disabled' : ''}}"
+                <a class="btn btn-success btn-sm{{$browseDishs->currentPage() <= 1 ? ' disabled' : ''}}"
                   href="@getLink(page,browseDishs,$browseDishs->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
-                <a class="btn btn-primary btn-sm{{$browseDishs->currentPage() >= $browseDishs->lastPage() ? ' disabled' : ''}}"
+                <a class="btn btn-success btn-sm{{$browseDishs->currentPage() >= $browseDishs->lastPage() ? ' disabled' : ''}}"
                   href="@getLink(page,browseDishs,$browseDishs->currentPage()+1)"><i
                     class="fa fa-chevron-right"></i></a>
               </div>

@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-12">
                         <a class="btn btn-sm btn-secondary" href="{{$ref}}">Cancel</a>
-                        <button class="btn btn-sm btn-primary">Submit</button>
+                        <button class="btn btn-sm btn-success">Submit</button>
                     </div>
                 </div>
             </form>

@@ -42,7 +42,7 @@
                   <td class="text-right">{{$cartHeaderCartDetail->qty}}</td>
                   <td class="text-right">{{$cartHeaderCartDetail->dish_price}}</td>
                   <td class="text-center">
-                    <!-- <a class="btn btn-sm btn-primary" href="/cartDetails/{{$cartHeaderCartDetail->id}}/edit"
+                    <!-- <a class="btn btn-sm btn-success" href="/cartDetails/{{$cartHeaderCartDetail->id}}/edit"
                       title="Edit"><i class="fa fa-pencil"></i></a> -->
                     <form action="/cartDetails/{{$cartHeaderCartDetail->id}}" method="POST">
                       @method("DELETE")
@@ -57,8 +57,12 @@
             </table>
             <hr />
           </div>
-          <div class="col-12">
+          <div class="col-12 d-flex flex-row">
             <a class="btn btn-sm btn-secondary" href="{{$ref}}">Back</a>
+            <form action="{{ route('order.add') }}" method="POST">
+              @csrf
+              <button class="btn btn-sm btn-success" type="submit">Proceed to Checkout</button>
+            </form>
           </div>
         </div>
       </div>

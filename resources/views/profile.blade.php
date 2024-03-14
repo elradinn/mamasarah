@@ -27,7 +27,7 @@
                         @error('password')<span class="text-danger">{{$message}}</span>@enderror
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-sm btn-primary">Submit</button>
+                        <button class="btn btn-sm btn-success">Submit</button>
                     </div>
                 </div>
             </form>

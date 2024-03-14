@@ -25,7 +25,7 @@
                         <input id="search_word" autocomplete="off" onkeyup="search(event)" value="{{request()->input('sw')}}" class="form-control form-control-sm" />
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary btn-sm" onclick="search()">Search</button>
+                        <button class="btn btn-success btn-sm" onclick="search()">Search</button>
                         <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <td>{{$cartHeader->user_account_name}}</td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-secondary" href="/cartHeaders/{{$cartHeader->id}}" title="View"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-sm btn-primary" href="/cartHeaders/{{$cartHeader->id}}/edit" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-success" href="/cartHeaders/{{$cartHeader->id}}/edit" title="Edit"><i class="fa fa-pencil"></i></a>
                                 <form action="/cartHeaders/{{$cartHeader->id}}" method="POST">
                                     @method("DELETE")
                                     @csrf
@@ -85,13 +85,13 @@
                                 </select>
                             </label> of <span>{{$cartHeaders->lastPage()}}</span>
                             <div class="btn-group">
-                                <a class="btn btn-primary btn-sm{{$cartHeaders->currentPage() <= 1 ? ' disabled' : ''}}" href="@getLink(page,cartHeaders,$cartHeaders->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
-                                <a class="btn btn-primary btn-sm{{$cartHeaders->currentPage() >= $cartHeaders->lastPage() ? ' disabled' : ''}}" href="@getLink(page,cartHeaders,$cartHeaders->currentPage()+1)"><i class="fa fa-chevron-right"></i></a>
+                                <a class="btn btn-success btn-sm{{$cartHeaders->currentPage() <= 1 ? ' disabled' : ''}}" href="@getLink(page,cartHeaders,$cartHeaders->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
+                                <a class="btn btn-success btn-sm{{$cartHeaders->currentPage() >= $cartHeaders->lastPage() ? ' disabled' : ''}}" href="@getLink(page,cartHeaders,$cartHeaders->currentPage()+1)"><i class="fa fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-sm btn-primary" href="/cartHeaders/create">Create</a>
+                <a class="btn btn-sm btn-success" href="/cartHeaders/create">Create</a>
             </div>
             <style>
                 #searchbar_toggle_menu { display: inline-flex!important }

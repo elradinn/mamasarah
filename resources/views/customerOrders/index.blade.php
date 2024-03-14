@@ -6,9 +6,14 @@
       <div>
         <div class="row">
           <div class="form-group col-md-6 col-lg-4">
+            <label for="order_header_id">Id</label>
+            <input readonly id="order_header_id" name="id" class="form-control form-control-sm"
+              value="{{$orderHeader->id}}" type="number" required />
+          </div>
+          <div class="form-group col-md-6 col-lg-4">
             <label for="order_header_order_date">Order Date</label>
             <input readonly id="order_header_order_date" name="order_date" class="form-control form-control-sm"
-              value="{{$orderHeader->order_date}}" autocomplete="off" required />
+              value="{{$orderHeader->order_date}}" data-type="date" autocomplete="off" required />
           </div>
           <div class="form-group col-md-6 col-lg-4">
             <label for="user_account_name">User Account Name</label>
@@ -35,11 +40,7 @@
               <tbody>
                 @foreach ($orderHeaderOrderDetails as $orderHeaderOrderDetail)
                 <tr>
-
-                  <td class="d-none d-md-table-cell text-center">@if ($orderHeaderOrderDetail->dish_image) <a
-                      href="/storage/dishs/{{$orderHeaderOrderDetail->dish_image}}" target="_blank"
-                      title="{{$orderHeaderOrderDetail->dish_image}}"><img class="img-list"
-                        src="/storage/dishs/{{$orderHeaderOrderDetail->dish_image}}" /></a> @endif</td>
+                  <td>{{$orderHeaderOrderDetail->dish_image}}</td>
                   <td>{{$orderHeaderOrderDetail->dish_name}}</td>
                   <td class="text-right">{{$orderHeaderOrderDetail->qty}}</td>
                   <td class="text-right">{{$orderHeaderOrderDetail->dish_price}}</td>
@@ -58,6 +59,8 @@
                 @endforeach
               </tbody>
             </table>
+            <a class="btn btn-sm btn-success"
+              href="/orderDetails/create?order_detail_order_id={{$orderHeader->id}}">Add</a>
             <hr />
           </div>
           <div class="col-12">
@@ -65,7 +68,8 @@
             <a class="btn btn-sm btn-success"
               href="/orderHeaders/{{$orderHeader->id}}/edit?ref={{urlencode($ref)}}">Edit</a>
           </div>
-        </div>
+        </d
+iv>
       </div>
     </div>
   </div>

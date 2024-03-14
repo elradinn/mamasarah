@@ -25,7 +25,7 @@
                         <input id="search_word" autocomplete="off" onkeyup="search(event)" value="{{request()->input('sw')}}" class="form-control form-control-sm" />
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary btn-sm" onclick="search()">Search</button>
+                        <button class="btn btn-success btn-sm" onclick="search()">Search</button>
                         <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <td>{{$brand->name}}</td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-secondary" href="/brands/{{$brand->id}}" title="View"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-sm btn-primary" href="/brands/{{$brand->id}}/edit" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-success" href="/brands/{{$brand->id}}/edit" title="Edit"><i class="fa fa-pencil"></i></a>
                                 <form action="/brands/{{$brand->id}}" method="POST">
                                     @method("DELETE")
                                     @csrf
@@ -85,13 +85,13 @@
                                 </select>
                             </label> of <span>{{$brands->lastPage()}}</span>
                             <div class="btn-group">
-                                <a class="btn btn-primary btn-sm{{$brands->currentPage() <= 1 ? ' disabled' : ''}}" href="@getLink(page,brands,$brands->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
-                                <a class="btn btn-primary btn-sm{{$brands->currentPage() >= $brands->lastPage() ? ' disabled' : ''}}" href="@getLink(page,brands,$brands->currentPage()+1)"><i class="fa fa-chevron-right"></i></a>
+                                <a class="btn btn-success btn-sm{{$brands->currentPage() <= 1 ? ' disabled' : ''}}" href="@getLink(page,brands,$brands->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
+                                <a class="btn btn-success btn-sm{{$brands->currentPage() >= $brands->lastPage() ? ' disabled' : ''}}" href="@getLink(page,brands,$brands->currentPage()+1)"><i class="fa fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-sm btn-primary" href="/brands/create">Create</a>
+                <a class="btn btn-sm btn-success" href="/brands/create">Create</a>
             </div>
             <style>
                 #searchbar_toggle_menu { display: inline-flex!important }

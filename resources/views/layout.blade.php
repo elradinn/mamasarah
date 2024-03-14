@@ -24,16 +24,16 @@
             </a>
             <ul class="list-unstyled">
                 <li>
-                    <a href="/home" class="{{ Str::endsWith(request()->path(), 'home') ? 'active bg-primary' : '' }}">Home</a>
+                    <a href="/home" class="{{ Str::endsWith(request()->path(), 'home') ? 'active bg-success' : '' }}">Home</a>
                 </li>
                 @foreach (auth()->user()->getMenu() as $menu)
-                <li><a href="/{{$menu['path']}}" class="{{ explode('/', request()->path())[0] == $menu['path'] ? 'active bg-primary' : '' }}">{{$menu['title']}}</a></li>
+                <li><a href="/{{$menu['path']}}" class="{{ explode('/', request()->path())[0] == $menu['path'] ? 'active bg-success' : '' }}">{{$menu['title']}}</a></li>
                 @endforeach
             </ul>
         </nav>
         <div id="body">
             <nav class="navbar bg-light border-bottom">
-                <label for="sidebar_toggle" class=" btn btn-primary btn-sm"><i class="fa fa-bars"></i></label>
+                <label for="sidebar_toggle" class=" btn btn-success btn-sm"><i class="fa fa-bars"></i></label>
                 <ul class="navbar-nav ml-auto">
                     <li id="searchbar_toggle_menu" class="d-none">
                         <a class="nav-link text-secondary" href="#"><label for="searchbar_toggle" class="d-lg-none"><i class="fa fa-search"></i></label></a>

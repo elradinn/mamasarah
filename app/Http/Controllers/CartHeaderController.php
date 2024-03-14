@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Util;
 use App\Models\CartHeader;
+use App\Models\OrderHeader;
+use App\Models\CartDetail;
+use App\Models\OrderDetail;
+use Illuminate\Http\Request;
 
 class CartHeaderController extends Controller {
 
@@ -101,5 +105,35 @@ class CartHeaderController extends Controller {
     {
         CartHeader::find($id)->delete();
         return back();
+    }
+
+    public function proceedToOrder(Request $request)
+    {
+        $userId = Auth::id();
+
+        // Get cart header and details
+        $cartHeader = CartHeader::where('user_id', $userId)->first();
+        $cartDetails = CartDetail::where('cart_id', $cartHeader->id)->get();
+
+        // Create order header
+        $orderHeader = new OrderHeader();
+        $orderHeader->user_id = $cartHeader->user_id;
+        $orderHeader->status_id = 3; // Dispatch default
+        $orderHeader->order_date = date('Y-m-d H:i:s');
+        $orderHeader->save();
+
+        // Create order details for each cart detail
+        foreach ($cartDetails as $cartDetail) {
+            $orderDetail = new OrderDetail();
+            $orderDetail->order_id = $orderHeader->id;
+            $orderDetail->dish_id = $cartDetail->dish_id;
+            $orderDetail->qty = $cartDetail->qty;
+            $orderDetail->save();
+        }
+
+        // Delete cart details to reset card header
+        CartDetail::where('cart_id', $cartHeader->id)->delete();
+
+        return redirect('/cartHeaders');
     }
 }
