@@ -59,8 +59,9 @@
           </div>
           <div class="col-12 d-flex flex-row">
             <a class="btn btn-sm btn-secondary" href="{{$ref}}">Back</a>
-            <form action="{{ route('order.add') }}" method="POST">
+            <form action="{{ route('payment.pay') }}" method="POST">
               @csrf
+              <input type="hidden" name="order_items" value="{{ json_encode($cartHeaderCartDetails) }}">
               <button class="btn btn-sm btn-success" type="submit">Proceed to Checkout</button>
             </form>
           </div>

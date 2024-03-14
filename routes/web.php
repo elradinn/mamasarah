@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrowseDishController;
 use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\CartHeaderController;
+use App\Http\Controllers\PaymentController;
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
@@ -19,6 +20,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/updateProfile', [ SystemController::class, 'updateProfile' ]);
     Route::post('/add-to-cart', [BrowseDishController::class, 'addToCart'])->name('cart.add');
     Route::post('/proceed-order', [CartHeaderController::class, 'proceedToOrder'])->name('order.add');
+    Route::post('/payment', [PaymentController::class, 'pay'])->name('payment.pay');
     Route::middleware('role:ADMIN')->resource('/userAccounts', UserAccountController::class);
     Route::middleware('role:ADMIN')->resource('/orderHeaders', OrderHeaderController::class);
     Route::middleware('role:ADMIN')->resource('/orderDetails', OrderDetailController::class);
@@ -27,6 +29,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::middleware('role:USER')->resource('/browseDishs', BrowseDishController::class);
     Route::middleware('role:USER')->resource('/cartDetails', CartDetailController::class);
     Route::middleware('role:USER')->resource('/cartHeaders', CartHeaderController::class);
+
+    Route::get('pay', [PaymentController::class, 'pay']);
+    Route::get('success', [PaymentController::class, 'sucess']);
 });
 Route::get('/logout', [ LoginController::class, 'logout' ]);
 Route::get('/resetPassword', [ LoginController::class, 'resetPassword' ]);

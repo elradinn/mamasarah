@@ -134,6 +134,6 @@ class CartHeaderController extends Controller {
         // Delete cart details to reset card header
         CartDetail::where('cart_id', $cartHeader->id)->delete();
 
-        return redirect('/cartHeaders');
+        return redirect('/pay');
     }
 }
