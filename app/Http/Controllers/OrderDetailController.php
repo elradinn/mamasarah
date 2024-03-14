@@ -63,9 +63,9 @@ class OrderDetailController extends Controller {
         return redirect(request()->query->get('ref'));
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        OrderDetail::find()->delete();
+        OrderDetail::find($id)->delete();
         return back();
     }
 }

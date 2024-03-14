@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col">
       <div class="col-12"><input id="searchbar_toggle" type="checkbox" />
-        <div id="searchbar" class="form-row mb-4">
+        <!-- <div id="searchbar" class="form-row mb-4">
           <div class="form-group col-lg-2">
             <select id="search_col" onchange="searchChange()" class="form-control form-control-sm">
               <option value="Dish.image" {{request()->input('sc') == 'Dish.image' ? 'selected' : ''}}>Browse
@@ -37,7 +37,7 @@
             <button class="btn btn-primary btn-sm" onclick="search()">Search</button>
             <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
           </div>
-        </div>
+        </div> -->
         <table class="table table-sm table-striped table-hover">
           <thead>
             <tr>
@@ -65,6 +65,7 @@
                     class="fa fa-eye"></i></a>
                 <form action="{{ route('cart.add') }}" method="POST">
                   @csrf
+                  <input type="hidden" name="dish_id" value="{{$browseDish->id}}" />
                   <button class="btn btn-sm btn-primary" type="submit">Add to Cart</button>
                 </form>
               </td>

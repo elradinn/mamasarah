@@ -50,7 +50,7 @@ class DishController extends Controller {
             'name' => 'unique:Dish,name|required|max:50',
             'price' => 'required|max:12,2',
             'category_id' => 'required',
-            'image' => 'required|max:50'
+            'image' => 'required|max:5000'
         ]);
         $image = Util::getFile('dishs', request()->file('image'));
         Dish::create([

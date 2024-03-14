@@ -59,9 +59,9 @@ class CartDetailController extends Controller {
         return redirect(request()->query->get('ref'));
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        CartDetail::find()->delete();
+        CartDetail::find($id)->delete();
         return back();
     }
 }

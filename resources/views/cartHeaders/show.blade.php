@@ -5,7 +5,7 @@
     <div class="col">
       <div>
         <div class="row">
-          <div class="form-group col-md-6 col-lg-4">
+          <!-- <div class="form-group col-md-6 col-lg-4">
             <label for="cart_header_id">Id</label>
             <input readonly id="cart_header_id" name="id" class="form-control form-control-sm"
               value="{{$cartHeader->id}}" type="number" required />
@@ -19,7 +19,7 @@
             <label for="user_account_name">User Account Name</label>
             <input readonly id="user_account_name" name="user_account_name" class="form-control form-control-sm"
               value="{{$cartHeader->user_account_name}}" maxlength="50" />
-          </div>
+          </div> -->
           <div class="col-12">
             <table class="table table-sm table-striped table-hover">
               <thead>
@@ -34,15 +34,16 @@
               <tbody>
                 @foreach ($cartHeaderCartDetails as $cartHeaderCartDetail)
                 <tr>
-                  <td>{{$cartHeaderCartDetail->dish_image}}</td>
+                  <td class="d-none d-md-table-cell text-center">@if ($cartHeaderCartDetail->dish_image) <a
+                      href="/storage/dishs/{{$cartHeaderCartDetail->dish_image}}" target="_blank"
+                      title="{{$cartHeaderCartDetail->dish_image}}"><img class="img-list"
+                        src="/storage/dishs/{{$cartHeaderCartDetail->dish_image}}" /></a> @endif</td>
                   <td>{{$cartHeaderCartDetail->dish_name}}</td>
                   <td class="text-right">{{$cartHeaderCartDetail->qty}}</td>
                   <td class="text-right">{{$cartHeaderCartDetail->dish_price}}</td>
                   <td class="text-center">
-                    <a class="btn btn-sm btn-secondary" href="/cartDetails/{{$cartHeaderCartDetail->id}}"
-                      title="View"><i class="fa fa-eye"></i></a>
-                    <a class="btn btn-sm btn-primary" href="/cartDetails/{{$cartHeaderCartDetail->id}}/edit"
-                      title="Edit"><i class="fa fa-pencil"></i></a>
+                    <!-- <a class="btn btn-sm btn-primary" href="/cartDetails/{{$cartHeaderCartDetail->id}}/edit"
+                      title="Edit"><i class="fa fa-pencil"></i></a> -->
                     <form action="/cartDetails/{{$cartHeaderCartDetail->id}}" method="POST">
                       @method("DELETE")
                       @csrf
@@ -54,18 +55,12 @@
                 @endforeach
               </tbody>
             </table>
-            <a class="btn btn-sm btn-primary" href="/cartDetails/create?cart_detail_cart_id={{$cartHeader->id}}">Add</a>
             <hr />
           </div>
           <div class="col-12">
             <a class="btn btn-sm btn-secondary" href="{{$ref}}">Back</a>
-            <a class="btn btn-sm btn-primary"
-              href="/cartHeaders/{{$cartHeader->id}}/edit?ref={{urlencode($ref)}}">Edit</a>
           </div>
         </div>
-      </div>
-      <div>
-        <h1>Your cart is empty!</h1>
       </div>
     </div>
   </div>
