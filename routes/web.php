@@ -12,9 +12,10 @@ use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\CartHeaderController;
 use App\Http\Controllers\PaymentController;
 
+Route::get('/', function () { return view('landing'); });
+
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', function () { return redirect('/home'); });
     Route::get('/home', [ SystemController::class, 'home' ]);
     Route::get('/profile', [ SystemController::class, 'profile' ]);
     Route::post('/updateProfile', [ SystemController::class, 'updateProfile' ]);

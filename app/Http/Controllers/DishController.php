@@ -47,7 +47,7 @@ class DishController extends Controller {
     {
         Util::setRef();
         $this->validate(request(), [
-            'image' => 'required|max:50',
+            'image' => 'required|max:5000',
             'name' => 'unique:Dish,name|required|max:50',
             'price' => 'required|max:12,2',
             'category_id' => 'required',
@@ -89,7 +89,7 @@ class DishController extends Controller {
     {
         Util::setRef();
         $this->validate(request(), [
-            'image' => 'max:5000',
+            'image' => 'max:500000',
             'name' => 'required|max:50',
             'price' => 'required|max:12,2',
             'category_id' => 'required',

@@ -29,10 +29,10 @@ class PaymentController extends Controller
             'data' => [
                 'attributes' => [
                     'line_items' => $lineItems,
-                    'payment_method_types' => ['gcash'],
+                    'payment_method_types' => ['gcash', 'card'],
                     'success_url' => 'http://127.0.0.1:8000/success',
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
-                    'description' => 'Hello nice one!'
+                    'description' => 'Mama Sarah\'s Lettuce Garden'
                 ],
             ]
         ];
@@ -49,7 +49,7 @@ class PaymentController extends Controller
         \Session::put('session_id',$response->data->id);
 
         return redirect()->to($response->data->attributes->checkout_url);
-    }   
+    }
 
     public function success()
     {
