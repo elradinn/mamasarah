@@ -31,7 +31,7 @@ class PaymentController extends Controller
                     'line_items' => $lineItems,
                     'payment_method_types' => ['gcash', 'card'],
                     'success_url' => 'http://127.0.0.1:8000/success',
-                    'cancel_url' => 'http://127.0.0.1:8000/cancel',
+                    'cancel_url' => 'http://127.0.0.1:8000/cartHeaders',
                     'description' => 'Mama Sarah\'s Lettuce Garden'
                 ],
             ]
