@@ -53,7 +53,13 @@ class PaymentController extends Controller
 
         \Session::put('session_id',$response->data->id);
 
-        return redirect()->to($response->data->attributes->checkout_url);
+        $checkoutUrl = $response->data->attributes->checkout_url;
+        $parsedUrl = parse_url($checkoutUrl);
+        $relativePath = isset($parsedUrl['path']) ? $parsedUrl['path'] : '';
+
+        return redirect()->to($relativePath);
+
+        // return redirect()->to($response->data->attributes->checkout_url);
     }
 
     public function success(Request $request)
