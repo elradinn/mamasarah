@@ -51,7 +51,7 @@ class CartHeaderController extends Controller {
         $cartHeaderCartDetails = DB::table('CartHeader')
             ->join('CartDetail', 'CartHeader.id', 'CartDetail.cart_id')
             ->join('Dish', 'CartDetail.dish_id', 'Dish.id')
-            ->select('Dish.image as dish_image', 'Dish.name as dish_name', 'CartDetail.qty', 'Dish.price as dish_price', 'CartDetail.id')
+            ->select('CartHeader.user_id as user_id','Dish.image as dish_image', 'Dish.name as dish_name', 'CartDetail.qty', 'Dish.price as dish_price', 'CartDetail.id')
             ->where('CartHeader.user_id', $id)
             ->get();
         return view('cartHeaders.show', ['cartHeader' => $cartHeader, 'ref' => Util::getRef('/cartHeaders'), 'cartHeaderCartDetails' => $cartHeaderCartDetails]);

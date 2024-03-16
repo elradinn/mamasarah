@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Curl;
+use App\Models\CartDetail;
+use App\Models\OrderDetail;
+use App\Models\CartHeader;
+use App\Models\OrderHeader;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -30,7 +35,7 @@ class PaymentController extends Controller
                 'attributes' => [
                     'line_items' => $lineItems,
                     'payment_method_types' => ['gcash', 'card'],
-                    'success_url' => 'http://127.0.0.1:8000/success',
+                    'success_url' => 'http://127.0.0.1:8000/orders',
                     'cancel_url' => 'http://127.0.0.1:8000/cartHeaders',
                     'description' => 'Mama Sarah\'s Lettuce Garden'
                 ],
@@ -51,7 +56,7 @@ class PaymentController extends Controller
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
-    public function success()
+    public function success(Request $request)
     {
        $sessionId = \Session::get('session_id');
 
@@ -62,8 +67,32 @@ class PaymentController extends Controller
                 ->asJson()
                 ->get();
 
-        dd($response);
+      $userId = Auth::id();
 
+        // Get cart header and details
+        $cartHeader = CartHeader::where('user_id', $userId)->first();
+        $cartDetails = CartDetail::where('cart_id', $cartHeader->id)->get();
+
+        // Create order header
+        $orderHeader = new OrderHeader();
+        $orderHeader->user_id = $cartHeader->user_id;
+        $orderHeader->status_id = 3; // Dispatch default
+        $orderHeader->order_date = date('Y-m-d H:i:s');
+        $orderHeader->save();
+
+        // Create order details for each cart detail
+        foreach ($cartDetails as $cartDetail) {
+            $orderDetail = new OrderDetail();
+            $orderDetail->order_id = $orderHeader->id;
+            $orderDetail->dish_id = $cartDetail->dish_id;
+            $orderDetail->qty = $cartDetail->qty;
+            $orderDetail->save();
+        }
+
+        // Delete cart details to reset card header
+        CartDetail::where('cart_id', $cartHeader->id)->delete();
+
+        return redirect('/orders');
     }
 
 
