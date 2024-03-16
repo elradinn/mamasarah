@@ -53,9 +53,8 @@ class PaymentController extends Controller
 
         \Session::put('session_id',$response->data->id);
 
-        $link = 'https://checkout.paymongo.com/'.$response->data->attributes->checkout_url;
-
-        return redirect()->to($link);
+        $checkoutUrl = url($response->data->attributes->checkout_url);
+        return redirect()->to($checkoutUrl);
     }
 
     public function success(Request $request)
