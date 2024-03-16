@@ -58,14 +58,21 @@
         </ul>
       </nav>
       <!-- .navbar -->
-      <li class="dropdown">
-        <a class="nav-link text-secondary dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i>
-          <span class="d-none d-lg-inline"> {{ auth()->user()->name }}</span></a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <a href="/profile" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
-          <a href="/logout" class="dropdown-item"><i class="fa fa-sign-out"></i> Logout</a>
-        </div>
-      </li>
+      <div class="dropdown">
+        <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Hello {{ auth()->user()->name }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="/profile">Profile</a></li>
+          <li><a class="dropdown-item" href="/orders">Orders</a></li>
+          <hr />
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </div>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    </div>
     </div>
   </header>
   <!-- End Header -->

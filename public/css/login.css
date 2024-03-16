@@ -93,13 +93,6 @@ section {
 .breadcrumbs {
     padding: 15px 0;
     background: rgba(55, 55, 63, 0.05);
-    margin-top: 90px;
-}
-
-@media (max-width: 575px) {
-    .breadcrumbs {
-        margin-top: 70px;
-    }
 }
 
 .breadcrumbs h2 {

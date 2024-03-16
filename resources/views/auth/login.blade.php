@@ -33,24 +33,6 @@
 
 <body>
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <!-- .navbar -->
-      <a class="btn-book-a-table" href="login.html">Login to Order</a>
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-    </div>
-  </header>
   <!-- End Header -->
 
   <main id="main">
@@ -60,7 +42,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Login</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li>Login</li>
           </ol>
         </div>
@@ -80,7 +62,7 @@
             <button class="w-100 mb-3 button">Login</button>
             <p class="text-center">
               Not registered?
-              <a href="register.html"> Create an account </a>
+              <a href="/register"> Create an account </a>
             </p>
           </div>
         </form>

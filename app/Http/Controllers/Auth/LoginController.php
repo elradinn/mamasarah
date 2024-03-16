@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,7 @@ class LoginController extends Controller
     }
 
     protected function credentials()
-    {        
+    {
         return [ $this->username() => request()->name, 'password' => request()->password, 'active' => 1 ];
     }
 
@@ -84,6 +85,15 @@ class LoginController extends Controller
         }
         else {
             return view('auth.changePassword', [ 'error' => true, 'token' => $token ]);
+        }
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->hasRole('ADMIN')) {
+            return redirect('/home');
+        } else {
+            return redirect('/browseDishs');
         }
     }
 }
