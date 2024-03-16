@@ -32,10 +32,10 @@
     <!-- Tab Contents -->
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
       <!-- Tab Pane -->
-      <div class="tab-pane fade active show" id="menu-starters">
+      <div class="tab-pane fade active show" id="silog">
         <div class="tab-header text-center">
           <p>Menu</p>
-          <h3>Starters</h3>
+          <h3>Silog</h3>
         </div>
 
         <div class="row gy-5">
@@ -60,7 +60,37 @@
           @endforeach
         </div>
       </div>
-      <!-- End Starter Menu Content -->
+      <!-- End Pane -->
+
+      <!-- Tab Pane -->
+      <div class="tab-pane fade active show" id="drinks">
+        <div class="tab-header text-center">
+          <p>Menu</p>
+          <h3>Drinks</h3>
+        </div>
+
+        <div class="row gy-5">
+          @foreach ($browseDishs as $browseDish)
+          <div class="col-lg-4 menu-item">
+            @if ($browseDish->category_name == 'Drinks')
+            <a href="/storage/dishs/{{$browseDish->image}}" class="glightbox"><img
+                src="/storage/dishs/{{$browseDish->image}}" class="menu-img img-fluid" alt="" /></a>
+            <h4>{{$browseDish->name}}</h4>
+            <p class="ingredients">
+              {{$browseDish->description}}
+            </p>
+            <p class="price">PHP {{$browseDish->price}}</p>
+            <!-- <a href="" class="add-order">Add to Order</a> -->
+            <form action="{{ route('cart.add') }}" method="POST">
+              @csrf
+              <input type="hidden" name="dish_id" value="{{$browseDish->id}}" />
+              <button class="add-order" type="submit" onclick="alert('Dish added successfully')">Add to Cart</button>
+            </form>
+          </div>
+          @endif
+          @endforeach
+        </div>
+      </div>
     </div>
   </div>
   </div>
