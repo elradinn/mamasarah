@@ -15,26 +15,10 @@ class BrowseDishController extends Controller {
 
     public function index()
     {
-        $size = request()->input('size') ? request()->input('size') : 10;
-        $sort = request()->input('sort') ? request()->input('sort') : 'Category.name';
-        $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'asc';
-        $column = request()->input('sc');
-        $query = Dish::query()
-            ->leftjoin('Category', 'Dish.category_id', 'Category.id')
-            ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description')
-            ->orderBy($sort, $sortDirection);
-        if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-            abort(403);
-        }
-        if (request()->input('sw')) {
-            $search = request()->input('sw');
-            $operator = Util::getOperator(request()->input('so'));
-            if ($operator == 'like') {
-                $search = '%'.$search.'%';
-            }
-            $query->where($column, $operator, $search);
-        }
-        $browseDishs = $query->paginate($size);
+        $browseDishs = Dish::query()
+        ->leftJoin('Category', 'Dish.category_id', '=', 'Category.id')
+        ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description')
+        ->get();
         return view('browseDishs.index', ['browseDishs' => $browseDishs]);
     }
 
