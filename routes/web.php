@@ -11,6 +11,7 @@ use App\Http\Controllers\BrowseDishController;
 use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\CartHeaderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CustomerOrderController;
 
 Route::get('/', function () { return view('landing'); });
 
@@ -30,6 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::middleware('role:USER')->resource('/browseDishs', BrowseDishController::class);
     Route::middleware('role:USER')->resource('/cartDetails', CartDetailController::class);
     Route::middleware('role:USER')->resource('/cartHeaders', CartHeaderController::class);
+    Route::middleware('role:USER')->resource('/orders', CustomerOrderController::class);
 
     Route::get('pay', [PaymentController::class, 'pay']);
     Route::get('success', [PaymentController::class, 'sucess']);

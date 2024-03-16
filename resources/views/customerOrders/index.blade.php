@@ -1,80 +1,107 @@
-@extends('layout')
+@extends('layout.customer')
 @section('content')
 <div class="container">
   <div class="row">
     <div class="col">
-      <div>
-        <div class="row">
-          <div class="form-group col-md-6 col-lg-4">
-            <label for="order_header_id">Id</label>
-            <input readonly id="order_header_id" name="id" class="form-control form-control-sm"
-              value="{{$orderHeader->id}}" type="number" required />
+      <div class="col-12"><input id="searchbar_toggle" type="checkbox" />
+        <div id="searchbar" class="form-row mb-4">
+          <div class="form-group col-lg-2">
+            <select id="search_col" onchange="searchChange()" class="form-control form-control-sm">
+              <option value="OrderHeader.id" data-type="number"
+                {{request()->input('sc') == 'OrderHeader.id' ? 'selected' : ''}}>Order Header Id</option>
+              <option value="OrderHeader.order_date" data-type="date"
+                {{request()->input('sc') == 'OrderHeader.order_date' ? 'selected' : ''}}>Order Header Order Date
+              </option>
+              <option value="UserAccount.address" {{request()->input('sc') == 'UserAccount.address' ? 'selected' : ''}}>
+                User Account Address</option>
+              <option value="Status.name" {{request()->input('sc') == 'Status.name' ? 'selected' : ''}}>Status Name
+              </option>
+            </select>
           </div>
-          <div class="form-group col-md-6 col-lg-4">
-            <label for="order_header_order_date">Order Date</label>
-            <input readonly id="order_header_order_date" name="order_date" class="form-control form-control-sm"
-              value="{{$orderHeader->order_date}}" data-type="date" autocomplete="off" required />
+          <div class="form-group col-lg-2">
+            <select id="search_oper" class="form-control form-control-sm">
+              <option value="c" {{request()->input('so') == 'c' ? 'selected' : ''}}>Contains</option>
+              <option value="e" {{request()->input('so') == 'e' ? 'selected' : ''}}>Equals</option>
+              <option value="g" {{request()->input('so') == 'g' ? 'selected' : ''}}>&gt;</option>
+              <option value="ge" {{request()->input('so') == 'ge' ? 'selected' : ''}}>&gt;&#x3D;</option>
+              <option value="l" {{request()->input('so') == 'l' ? 'selected' : ''}}>&lt;</option>
+              <option value="le" {{request()->input('so') == 'le' ? 'selected' : ''}}>&lt;&#x3D;</option>
+            </select>
           </div>
-          <div class="form-group col-md-6 col-lg-4">
-            <label for="user_account_name">User Account Name</label>
-            <input readonly id="user_account_name" name="user_account_name" class="form-control form-control-sm"
-              value="{{$orderHeader->user_account_name}}" maxlength="50" />
+          <div class="form-group col-lg-2">
+            <input id="search_word" autocomplete="off" onkeyup="search(event)" value="{{request()->input('sw')}}"
+              class="form-control form-control-sm" />
           </div>
-          <div class="form-group col-md-6 col-lg-4">
-            <label for="user_account_address">User Account Address</label>
-            <input readonly id="user_account_address" name="user_account_address" class="form-control form-control-sm"
-              value="{{$orderHeader->user_account_address}}" maxlength="50" />
+          <div class="col">
+            <button class="btn btn-success btn-sm" onclick="search()">Search</button>
+            <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
           </div>
-          <div class="col-12">
-            <table class="table table-sm table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>Dish Image</th>
-                  <th>Dish</th>
-                  <th>Qty</th>
-                  <th>Price</th>
-                  <th>Remarks</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($orderHeaderOrderDetails as $orderHeaderOrderDetail)
-                <tr>
-                  <td>{{$orderHeaderOrderDetail->dish_image}}</td>
-                  <td>{{$orderHeaderOrderDetail->dish_name}}</td>
-                  <td class="text-right">{{$orderHeaderOrderDetail->qty}}</td>
-                  <td class="text-right">{{$orderHeaderOrderDetail->dish_price}}</td>
-                  <td>{{$orderHeaderOrderDetail->remarks}}</td>
-                  <td class="text-center">
-                    <a class="btn btn-sm btn-success" href="/orderDetails/{{$orderHeaderOrderDetail->id}}/edit"
-                      title="Edit"><i class="fa fa-pencil"></i></a>
-                    <form action="/orderDetails/{{$orderHeaderOrderDetail->id}}" method="POST">
-                      @method("DELETE")
-                      @csrf
-                      <a class="btn btn-sm btn-danger" href="#!" onclick="deleteItem(this)" title="Delete"><i
-                          class="fa fa-times"></i></a>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-            <a class="btn btn-sm btn-success"
-              href="/orderDetails/create?order_detail_order_id={{$orderHeader->id}}">Add</a>
-            <hr />
+        </div>
+        <table class="table table-sm table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="@getSortClass(OrderHeader.id,asc)"><a
+                  href="@getLink(sort,orderHeaders,OrderHeader.id,asc)">Id</a></th>
+              <th class="@getSortClass(OrderHeader.order_date)"><a
+                  href="@getLink(sort,orderHeaders,OrderHeader.order_date)">Order Date</a></th>
+              <th class="@getSortClass(UserAccount.address)"><a
+                  href="@getLink(sort,orderHeaders,UserAccount.address)">Address</a></th>
+              <th class="@getSortClass(Status.name)"><a href="@getLink(sort,orderHeaders,Status.name)">Status Name</a>
+              </th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($orderHeaders as $orderHeader)
+            @if ($orderHeader->user_id === auth()->user()->id)
+            <tr>
+              <td class="text-center">{{$orderHeader->id}}</td>
+              <td class="text-center">{{$orderHeader->order_date}}</td>
+              <td>{{$orderHeader->user_account_address}}</td>
+              <td>{{$orderHeader->status_name}}</td>
+              <td class="text-center">
+                <form action="/orders/{{$orderHeader->id}}" method="POST">
+                  @method("DELETE")
+                  @csrf
+                  <a class="btn btn-sm btn-danger" href="#!" onclick="deleteItem(this)" title="Delete"><i
+                      class="fa fa-times"></i></a>
+                </form>
+              </td>
+            </tr>
+            @endif
+            @endforeach
+          </tbody>
+        </table>
+        <div class="row mb-1">
+          <div class="float-right d-block d-md-none">
+            <label> Page
+              <select id="page_index" onchange="location = this.value">
+                @for ($page = 1; $page <= $orderHeaders->lastPage(); $page++)
+                  <option value="@getLink(page,orderHeaders,$page)"
+                    {{$orderHeaders->currentPage() == $page ? 'selected' : ''}}>{{$page}}</option>
+                  @endfor
+              </select>
+            </label> of <span>{{$orderHeaders->lastPage()}}</span>
+            <div class="btn-group">
+              <a class="btn btn-success btn-sm{{$orderHeaders->currentPage() <= 1 ? ' disabled' : ''}}"
+                href="@getLink(page,orderHeaders,$orderHeaders->currentPage()-1)"><i class="fa fa-chevron-left"></i></a>
+              <a class="btn btn-success btn-sm{{$orderHeaders->currentPage() >= $orderHeaders->lastPage() ? ' disabled' : ''}}"
+                href="@getLink(page,orderHeaders,$orderHeaders->currentPage()+1)"><i
+                  class="fa fa-chevron-right"></i></a>
+            </div>
           </div>
-          <div class="col-12">
-            <a class="btn btn-sm btn-secondary" href="{{$ref}}">Back</a>
-            <a class="btn btn-sm btn-success"
-              href="/orderHeaders/{{$orderHeader->id}}/edit?ref={{urlencode($ref)}}">Edit</a>
-          </div>
-        </d
-iv>
+        </div>
       </div>
     </div>
+    <style>
+    #searchbar_toggle_menu {
+      display: inline-flex !important
+    }
+    </style>
   </div>
 </div>
+</div>
 <script>
-initPage(true)
+initPage()
 </script>
 @endsection
