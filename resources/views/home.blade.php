@@ -7,8 +7,8 @@
       <div class="card text-center">
         <div class="card-body">
           <h2>
-            Date: <?php echo date('M j, Y'); ?><br>
-            Time: <?php echo date('h:i:s A'); ?>
+            Date: <?php echo date('M j, Y', strtotime('+8 hours')); ?><br>
+            Time: <?php echo date('h:i:s A', strtotime('+8 hours')); ?>
           </h2>
         </div>
       </div>
