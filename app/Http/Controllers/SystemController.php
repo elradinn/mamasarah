@@ -19,7 +19,9 @@ class SystemController extends Controller {
 
         foreach ($orderDetails as $orderDetail) {
             $dish = Dish::find($orderDetail->dish_id);
-            $totalEarnings += $dish->price * $orderDetail->qty;
+            if ($dish) {
+                $totalEarnings += $dish->price * $orderDetail->qty;
+            }
         }
 
         $data = [
