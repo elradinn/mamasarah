@@ -217,7 +217,7 @@
                 <i class="bi bi-1-square-fill"></i>
                 <h4>What are the payment options available?</h4>
                 <p>
-                  GCASH is the used payment
+                  We can accept GCASH and Credit/Debit Card payment
                 </p>
               </div>
             </div>
