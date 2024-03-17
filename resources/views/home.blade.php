@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="col-md-4 mb-4">
+    <div class="col-md-3 mb-4">
       <div class="card text-center">
         <div class="card-body">
           <i class="fa fa-users fa-4x mb-3"></i>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
+    <div class="col-md-3 mb-4">
       <div class="card text-center">
         <div class="card-body">
           <i class="fa fa-cutlery fa-4x mb-3"></i>
@@ -32,12 +32,21 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
+    <div class="col-md-3 mb-4">
       <div class="card text-center">
         <div class="card-body">
           <i class="fa fa-shopping-cart fa-4x mb-3"></i>
           <h5 class="card-title">Orders</h5>
           <h4>{{$ordersCount}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fa fa-money fa-4x mb-3"></i>
+          <h5 class="card-title">Total Earnings</h5>
+          <h4>PHP {{$totalEarnings}}</h4>
         </div>
       </div>
     </div>

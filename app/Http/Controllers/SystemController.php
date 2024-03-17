@@ -7,21 +7,31 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\Dish;
 use App\Models\OrderHeader;
+use App\Models\OrderDetail;
 use App\Models\UserAccount;
 
 class SystemController extends Controller {
 
     public function home()
     {
-            $data = [
-                'usersCount' => UserAccount::count(),
-                'dishesCount' => Dish::count(),
-                'ordersCount' => OrderHeader::count(),
-                'deliveredCount' => OrderHeader::where('status_id', 1)->count(),
-                'cancelledCount' => OrderHeader::where('status_id', 2)->count(),
-                'dispatchedCount' => OrderHeader::where('status_id', 3)->count(),
-                'processingCount' => OrderHeader::where('status_id', 4)->count(),
-            ];
+        $totalEarnings = 0;
+        $orderDetails = OrderDetail::all();
+
+        foreach ($orderDetails as $orderDetail) {
+            $dish = Dish::find($orderDetail->dish_id);
+            $totalEarnings += $dish->price * $orderDetail->qty;
+        }
+
+        $data = [
+            'usersCount' => UserAccount::count(),
+            'dishesCount' => Dish::count(),
+            'ordersCount' => OrderHeader::count(),
+            'totalEarnings' => $totalEarnings,
+            'deliveredCount' => OrderHeader::where('status_id', 1)->count(),
+            'cancelledCount' => OrderHeader::where('status_id', 2)->count(),
+            'dispatchedCount' => OrderHeader::where('status_id', 3)->count(),
+            'processingCount' => OrderHeader::where('status_id', 4)->count(),
+        ];
 
         return view('home', $data);
     }

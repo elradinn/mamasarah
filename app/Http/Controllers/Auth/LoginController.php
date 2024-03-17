@@ -92,7 +92,7 @@ class LoginController extends Controller
     {
         if ($user->hasRole('ADMIN')) {
             return redirect('/home');
-        } else {
+        } else if ($user->hasRole('USER')) {
             return redirect('/browse-menu');
         }
     }
