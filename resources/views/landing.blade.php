@@ -202,7 +202,56 @@
     </section>
     <!-- End Events Section -->
 
-    <!-- ======= Contact Section ======= -->
+    <!-- ======= FAQ Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>Help</h2>
+          <p>Frequently Asked <span>Questions</span></p>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="row gy-4">
+            <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                <i class="bi bi-1-square-fill"></i>
+                <h4>What are the payment options available?</h4>
+                <p>
+                  GCASH is the used payment
+                </p>
+              </div>
+            </div>
+            <!-- End Icon Box -->
+
+            <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                <i class="bi bi-2-square-fill"></i>
+                <h4>What is the estimated delivery time for my order?
+                </h4>
+                <p>Depending on the food that you order, but usually it will take around 15-20 minutes to prepare the
+                  food </p>
+              </div>
+            </div>
+            <!-- End Icon Box -->
+
+            <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                <i class="bi bi-3-square-fill"></i>
+                <h4>Is there a minimum order value for delivery?</h4>
+                <p>
+                  There is no minimum order value when it comes to delivery
+                </p>
+              </div>
+            </div>
+            <!-- End Icon Box -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= EndFAQ Section ======= -->
+
+
+    <!-- ======= Location Section ======= -->
     <section id="location" class="contact">
       <div class="container" data-aos="fade-up">
         <div class="section-header">
@@ -211,14 +260,6 @@
         </div>
 
         <div class="mb-3">
-          <!-- <iframe
-              style="border: 0; width: 100%; height: 350px"
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
-              frameborder="0"
-              allowfullscreen
-            ></iframe> -->
-          <!-- <iframe src="h" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
           <iframe style="border: 0; width: 100%; height: 350px"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.4877151057276!2d123.19978510000001!3d13.628070099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1f343674ef225%3A0x20afd50f1f1989aa!2sMama%20Sarah&#39;s%20Lettuce%20Garden%20-%20Magsaysay%20Branch!5e0!3m2!1sen!2sph!4v1710678943257!5m2!1sen!2sph"
             frameborder="0" allowfullscreen></iframe>
