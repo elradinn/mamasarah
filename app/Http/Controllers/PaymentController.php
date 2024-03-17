@@ -36,7 +36,7 @@ class PaymentController extends Controller
                     'line_items' => $lineItems,
                     'payment_method_types' => ['gcash', 'card'],
                     'success_url' => env('APP_URL').'/orders',
-                    'cancel_url' => env('APP_URL').'/cartHeaders',
+                    'cancel_url' => env('APP_URL').'/cart',
                     'description' => 'Mama Sarah\'s Lettuce Garden'
                 ],
             ]
