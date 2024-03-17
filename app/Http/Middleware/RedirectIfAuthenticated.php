@@ -14,8 +14,10 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check() && Str::endsWith(request()->path(), 'login')) {
+            if (Auth::guard($guard)->check() && Auth::id() == 1) {
                 return redirect('/home');
+            } else if ((Auth::guard($guard)->check() && Auth::id() != 1)) {
+                return redirect('/browse-menu');
             }
         }
         return $next($request);
