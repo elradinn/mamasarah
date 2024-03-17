@@ -62,7 +62,7 @@ class CartHeaderController extends Controller {
         $userAccounts = DB::table('UserAccount')
             ->select('UserAccount.id', 'UserAccount.name')
             ->get();
-        return view('cartHeaders.create', ['ref' => Util::getRef('/cartHeaders'), 'userAccounts' => $userAccounts]);
+        return view('cartHeaders.create', ['ref' => Util::getRef('/cart'), 'userAccounts' => $userAccounts]);
     }
 
     public function store()
@@ -86,7 +86,7 @@ class CartHeaderController extends Controller {
         $userAccounts = DB::table('UserAccount')
             ->select('UserAccount.id', 'UserAccount.name')
             ->get();
-        return view('cartHeaders.edit', ['cartHeader' => $cartHeader, 'ref' => Util::getRef('/cartHeaders'), 'userAccounts' => $userAccounts]);
+        return view('cartHeaders.edit', ['cartHeader' => $cartHeader, 'ref' => Util::getRef('/cart'), 'userAccounts' => $userAccounts]);
     }
 
     public function update($id)

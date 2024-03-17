@@ -29,7 +29,7 @@ class BrowseDishController extends Controller {
             ->select('Dish.id', 'Dish.name', 'Dish.price', 'Dish.category_id', 'Dish.image', 'Category.name as category_name', 'Dish.description')
             ->where('Dish.id', $id)
             ->first();
-        return view('browseDishs.show', ['browseDish' => $browseDish, 'ref' => Util::getRef('/browseDishs')]);
+        return view('browseDishs.show', ['browseDish' => $browseDish, 'ref' => Util::getRef('/browse-menu')]);
     }
 
     public function addToCart(Request $request) {
@@ -49,6 +49,6 @@ class BrowseDishController extends Controller {
             ]);
         }
 
-        return redirect('/cartHeaders');
+        return redirect('/cart');
     }
 }

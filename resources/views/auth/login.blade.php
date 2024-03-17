@@ -52,18 +52,26 @@
 
     <section class="login">
       <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <p><span>Login</span> Account</p>
+        </div>
+
         <form action="/login" method="post" role="form" class="p-3 p-md-4 php-email-form">
           @csrf
-          <div class="container w-50">
-            <input id="user_account_name" name="name" class="form-control mb-4" value="{{old('name')}}" required
-              maxlength="50" placeholder="Enter username" />
-            <input id="user_account_password" name="password" class="form-control mb-4" value="{{old('password')}}"
-              type="password" required maxlength="100" placeholder="Enter password" />
-            <button class="w-100 mb-3 button">Login</button>
-            <p class="text-center">
-              Not registered?
-              <a href="/register"> Create an account </a>
-            </p>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-6 text-center">
+                <input id="user_account_name" name="name" class="form-control mb-4" value="{{old('name')}}" required
+                  maxlength="50" placeholder="Enter username" />
+                <input id="user_account_password" name="password" class="form-control mb-4" value="{{old('password')}}"
+                  type="password" required maxlength="100" placeholder="Enter password" />
+                <button class="w-100 mb-3 button">Login</button>
+                <p class="text-center">
+                  Not registered?
+                  <a href="/register"> Create an account </a>
+                </p>
+              </div>
+            </div>
           </div>
         </form>
       </div>

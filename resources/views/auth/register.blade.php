@@ -57,20 +57,24 @@
         <form action="/register" method="post" role="form" data-aos="fade-up" data-aos-delay="100"
           class="php-email-form p-3 p-md-4">
           @csrf
-          <div class="container w-50">
-            <input type="text" name="name" class="form-control mb-4" id="user_account_name" placeholder="Enter username"
-              required />
-            <input type="text" name="email" class="form-control mb-4" id="user_account_email" placeholder="Enter email"
-              required />
-            <input type="password" name="password" class="form-control mb-4" id="user_account_password"
-              placeholder="Enter password" required />
-            <input type="text" name="address" class="form-control mb-4" id="user_account_address"
-              placeholder="Enter delivery address" required />
-            <button class="registerButton w-100 mb-3">Register</button>
-            <p class="text-center">
-              Already have an account?
-              <a href="/login"> Login </a>
-            </p>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-6 text-center">
+                <input type="text" name="name" class="form-control mb-4" id="user_account_name"
+                  placeholder="Enter username" required />
+                <input type="text" name="email" class="form-control mb-4" id="user_account_email"
+                  placeholder="Enter email" required />
+                <input type="password" name="password" class="form-control mb-4" id="user_account_password"
+                  placeholder="Enter password" required />
+                <input type="text" name="address" class="form-control mb-4" id="user_account_address"
+                  placeholder="Enter delivery address" required />
+                <button class="registerButton w-100 mb-3">Register</button>
+                <p class="text-center">
+                  Already have an account?
+                  <a href="/login"> Login </a>
+                </p>
+              </div>
+            </div>
           </div>
         </form>
       </div>

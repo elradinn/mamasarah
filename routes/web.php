@@ -29,13 +29,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::middleware('role:ADMIN')->resource('/orderDetails', OrderDetailController::class);
     Route::middleware('role:ADMIN')->resource('/dishs', DishController::class);
     Route::middleware('role:ADMIN')->resource('/categories', CategoryController::class);
-    Route::middleware('role:USER')->resource('/browseDishs', BrowseDishController::class);
+    Route::middleware('role:USER')->resource('/browse-menu', BrowseDishController::class);
     Route::middleware('role:USER')->resource('/cartDetails', CartDetailController::class);
-    Route::middleware('role:USER')->resource('/cartHeaders', CartHeaderController::class);
+    Route::middleware('role:USER')->resource('/cart', CartHeaderController::class);
     Route::middleware('role:USER')->resource('/orders', CustomerOrderController::class);
-
-    // Route::get('pay', [PaymentController::class, 'pay']);
-    // Route::get('success', [PaymentController::class, 'sucess']);
 });
 Route::get('/logout', [ LoginController::class, 'logout' ]);
 Route::get('/resetPassword', [ LoginController::class, 'resetPassword' ]);

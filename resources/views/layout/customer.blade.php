@@ -43,6 +43,7 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('css/menu.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/orders.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/customer-profile.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -52,8 +53,8 @@
     <div class="container d-flex align-items-center justify-content-between">
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/browseDishs">Browse Dish</a></li>
-          <li><a href="/cartHeaders">Cart</a></li>
+          <li><a href="/browse-menu">Browse Dish</a></li>
+          <li><a href="/cart">Cart</a></li>
           <li><a href="/orders">Orders</a></li>
         </ul>
       </nav>

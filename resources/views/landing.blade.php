@@ -40,7 +40,7 @@
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#events">Events</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#location">Location</a></li>
         </ul>
       </nav>
       <!-- .navbar -->
@@ -203,11 +203,11 @@
     <!-- End Events Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="location" class="contact">
       <div class="container" data-aos="fade-up">
         <div class="section-header">
-          <h2>Contact</h2>
-          <p>Need Help? <span>Contact Us</span></p>
+          <h2>Location</h2>
+          <p>Where to <span>Find Us?</span></p>
         </div>
 
         <div class="mb-3">
@@ -217,8 +217,10 @@
               frameborder="0"
               allowfullscreen
             ></iframe> -->
+          <!-- <iframe src="h" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
           <iframe style="border: 0; width: 100%; height: 350px"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.9518828915084!2d123.2581477751689!3d13.660689786721745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1ed580ead68c3%3A0x3f05d6e74b6ff4d6!2sMama%20Sarah%E2%80%99s%20Lettuce%20Garden!5e0!3m2!1sen!2sph!4v1710072815819!5m2!1sen!2sph"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.4877151057276!2d123.19978510000001!3d13.628070099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1f343674ef225%3A0x20afd50f1f1989aa!2sMama%20Sarah&#39;s%20Lettuce%20Garden%20-%20Magsaysay%20Branch!5e0!3m2!1sen!2sph!4v1710678943257!5m2!1sen!2sph"
             frameborder="0" allowfullscreen></iframe>
         </div>
         <!-- End Google Maps -->
@@ -230,8 +232,7 @@
               <div>
                 <h3>Our Address</h3>
                 <p>
-                  Zone 9, Brgy Pacol, Naga City, Bicol Region, Philippines,
-                  Naga City, Philippines, 4400
+                  20 Chiu Bldg, Magsaysay Ave, Naga, 4400 Camarines Sur
                 </p>
               </div>
             </div>
@@ -254,7 +255,7 @@
               <i class="icon bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h3>Call Us</h3>
-                <p>0917 140 7968</p>
+                <p>0905 418 6008</p>
               </div>
             </div>
           </div>
@@ -266,42 +267,15 @@
               <div>
                 <h3>Opening Hours</h3>
                 <div>
-                  <strong>Mon-Fri:</strong> 8AM - 8PM;
+                  <strong>Mon-Thu:</strong> 6:30AM - 8:30PM
                   <br />
-                  <strong>Sat-Sun:</strong> 7AM - 8PM
+                  <strong>Fri-Sun:</strong> 6:30AM - 9PM
                 </div>
               </div>
             </div>
           </div>
           <!-- End Info Item -->
         </div>
-
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form p-3 p-md-4">
-          <div class="row">
-            <div class="col-xl-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required />
-            </div>
-            <div class="col-xl-6 form-group">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required />
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">
-              Your message has been sent. Thank you!
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit">Send Message</button>
-          </div>
-        </form>
         <!--End Contact Form -->
       </div>
     </section>
@@ -318,9 +292,8 @@
           <div>
             <h4>Address</h4>
             <p>
-              Zone 9, Brgy Pacol, Naga City, Bicol Region, Philippines, Naga
-              City <br />
-              Philippines, 4400<br />
+              20 Chiu Bldg, Magsaysay Ave, Naga, 4400 Camarines Sur<br />
+              Philippines, 4400
             </p>
           </div>
         </div>
@@ -330,7 +303,7 @@
           <div>
             <h4>Reservations</h4>
             <p>
-              <strong>Phone:</strong> 0917 140 7968<br />
+              <strong>Phone:</strong> 0905 418 6008<br />
               <strong>Email:</strong> mamasarahs.lettucegarden@gmail.com<br />
             </p>
           </div>
@@ -341,8 +314,8 @@
           <div>
             <h4>Opening Hours</h4>
             <p>
-              <strong>Mon-Fri: </strong>8AM - 8PM<br />
-              <strong>Sat-Sun: </strong>7AM - 8PM<br />
+              <strong> Mon-Thu: </strong>6:30AM - 8:30PM<br />
+              <strong>Fri-Sun: </strong>6:30AM - 9PM<br />
             </p>
           </div>
         </div>
@@ -350,9 +323,9 @@
         <div class="col-lg-3 col-md-6 footer-links">
           <h4>Follow Us</h4>
           <div class="social-links d-flex">
-            <a href="https://www.facebook.com/MamaSarahsLettuceGardenPacol" class="facebook"><i
-                class="bi bi-facebook"></i></a>
-            <a href="https://www.instagram.com/mamasarahslettucegarden/" class="instagram"><i
+            <a href="https://www.facebook.com/p/Mama-Sarahs-Lettuce-Garden-Magsaysay-Branch-100070854337090/"
+              class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/mamasarahslettucegarden/" target="_blank" class="instagram"><i
                 class="bi bi-instagram"></i></a>
           </div>
         </div>
@@ -364,13 +337,13 @@
         &copy; Copyright
         <strong><span>Mama Sarah's Lettuce Garden</span></strong>. All Rights Reserved
       </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
+      <!-- <div class="credits">
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+      </div> -->
     </div>
   </footer>
   <!-- End Footer -->
