@@ -64,23 +64,31 @@ class CartHeaderController extends Controller
         return view('cartHeaders.edit', ['cartHeader' => $cartHeader, 'ref' => Util::getRef('/cart'), 'userAccounts' => $userAccounts]);
     }
 
-    public function update($id)
-    {
-        $this->validate(request(), [
-            'dish_id' => 'required',
-            'qty' => 'required'
-        ]);
+    // public function update($id)
+    // {
+    //     $this->validate(request(), [
+    //         'dish_id' => 'required',
+    //         'qty' => 'required'
+    //     ]);
 
-        $cartDetail = CartDetail::find($id);
-        $cartDetail->update([
-            'cart_id' => request()->input('cart_id'),
-            'dish_id' => request()->input('dish_id'),
-            'qty' => request()->input('qty')
-        ]);
+    //     $cartDetail = CartDetail::find($id);
+    //     $cartDetail->update([
+    //         'cart_id' => request()->input('cart_id'),
+    //         'dish_id' => request()->input('dish_id'),
+    //         'qty' => request()->input('qty')
+    //     ]);
+
+    //     return back();
+    // }
+
+    public function updateQuantity(Request $request)
+    {
+        $cartDetail = CartDetail::find($request->input('cartDetail_id'));
+        $cartDetail->qty = $request->input('qty');
+        $cartDetail->save();
 
         return back();
     }
-
 
     public function destroy($id)
     {

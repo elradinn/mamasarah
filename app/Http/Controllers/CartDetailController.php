@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Util;
 use App\Models\CartDetail;
+use Illuminate\Http\Request;
 
 class CartDetailController extends Controller
 {
@@ -45,9 +46,11 @@ class CartDetailController extends Controller
         return view('cartDetails.edit', ['cartDetail' => $cartDetail, 'ref' => Util::getRef('/cartDetails'), 'dishs' => $dishs]);
     }
 
-    public function update($id)
+    public function updateQuantity(Request $request)
     {
-        $cartDetail = CartDetail::find($id);
+        $cartDetail = CartDetail::find($request->input('cartDetail_id'));
+        $cartDetail->qty = $request->input('qty');
+        $cartDetail->save();
 
         return back();
     }

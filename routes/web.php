@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [SystemController::class, 'profile']);
     Route::post('/updateProfile', [SystemController::class, 'updateProfile']);
     Route::post('/add-to-cart', [BrowseDishController::class, 'addToCart'])->name('cart.add');
+    Route::post('/update-cart-quantity', [CartHeaderController::class, 'updateQuantity'])->name('cart.updateQuantity');
     Route::post('/proceed-order', [CartHeaderController::class, 'proceedToOrder'])->name('order.add');
     Route::post('/payment', [PaymentController::class, 'pay'])->name('payment.pay');
     Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');

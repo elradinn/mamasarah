@@ -24,9 +24,10 @@
                                     <h4>{{ $cartHeaderCartDetail->dish_name }}</h4>
                                     <p class="ingredients">
                                         Qty:
-                                    <form action="/cartDetails/{{ $cartHeaderCartDetail->id }}" method="POST">
-                                        @method('PUT')
+                                    <form action="{{ route('cart.updateQuantity') }}" method="POST">
                                         @csrf
+                                        <input type="hidden" name="cartDetail_id"
+                                            value="{{ $cartHeaderCartDetail->id }}" />
                                         <input type="number" name="qty" value="{{ $cartHeaderCartDetail->qty }}"
                                             min="1">
                                         <button type="submit">Update</button>
