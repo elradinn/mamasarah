@@ -51,6 +51,8 @@ class RegisterController extends Controller
             'user_id' => $user->id
         ]);
 
+        session()->flash('success', 'Registration successful! Please log in.');
+
         return redirect('/login');
     }
 }
