@@ -35,8 +35,8 @@ class PaymentController extends Controller
                 'attributes' => [
                     'line_items' => $lineItems,
                     'payment_method_types' => ['gcash', 'card'],
-                    'success_url' => env('APP_URL').'/orders',
-                    'cancel_url' => env('APP_URL').'/cart',
+                    'success_url' => env('APP_URL') . '/success',
+                    'cancel_url' => env('APP_URL') . '/cart',
                     'description' => 'Mama Sarah\'s Lettuce Garden'
                 ],
             ]
@@ -45,29 +45,29 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
             ->withData($data)
             ->asJson()
             ->post();
 
 
-        \Session::put('session_id',$response->data->id);
+        \Session::put('session_id', $response->data->id);
 
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
     public function success(Request $request)
     {
-       $sessionId = \Session::get('session_id');
+        $sessionId = \Session::get('session_id');
 
 
-      $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/'.$sessionId)
-                ->withHeader('accept: application/json')
-                ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
-                ->asJson()
-                ->get();
+        $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->asJson()
+            ->get();
 
-      $userId = Auth::id();
+        $userId = Auth::id();
 
         // Get cart header and details
         $cartHeader = CartHeader::where('user_id', $userId)->first();
@@ -102,24 +102,24 @@ class PaymentController extends Controller
         $data['data']['attributes']['amount'] = 150050;
         $data['data']['attributes']['description'] = 'Test transaction.';
 
-         $response = Curl::to('https://api.paymongo.com/v1/links')
-                    ->withHeader('Content-Type: application/json')
-                    ->withHeader('accept: application/json')
-                    ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
-                    ->withData($data)
-                    ->asJson()
-                    ->post();
+        $response = Curl::to('https://api.paymongo.com/v1/links')
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->withData($data)
+            ->asJson()
+            ->post();
 
         dd($response);
     }
 
     public function linkStatus($linkid)
     {
-         $response = Curl::to('https://api.paymongo.com/v1/links/'.$linkid)
-                ->withHeader('accept: application/json')
-                ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
-                ->asJson()
-                ->get();
+        $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->asJson()
+            ->get();
 
         dd($response);
     }
@@ -132,24 +132,24 @@ class PaymentController extends Controller
         $data['data']['attributes']['payment_id']   = 'pay_sA83KrtmJUdue8prEHD6rZrY';
         $data['data']['attributes']['reason']       = 'duplicate';
 
-         $response = Curl::to('https://api.paymongo.com/refunds')
-                    ->withHeader('Content-Type: application/json')
-                    ->withHeader('accept: application/json')
-                    ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
-                    ->withData($data)
-                    ->asJson()
-                    ->post();
+        $response = Curl::to('https://api.paymongo.com/refunds')
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->withData($data)
+            ->asJson()
+            ->post();
 
         dd($response);
     }
 
     public function refundStatus($id)
     {
-        $response = Curl::to('https://api.paymongo.com/refunds/'.$id)
-                ->withHeader('accept: application/json')
-                ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
-                ->asJson()
-                ->get();
+        $response = Curl::to('https://api.paymongo.com/refunds/' . $id)
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->asJson()
+            ->get();
 
         dd($response);
     }

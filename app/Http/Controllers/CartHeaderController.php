@@ -12,33 +12,8 @@ use App\Models\CartDetail;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
-class CartHeaderController extends Controller {
-
-    // public function index()
-    // {
-    //     $size = request()->input('size') ? request()->input('size') : 10;
-    //     $sort = request()->input('sort') ? request()->input('sort') : 'CartHeader.id';
-    //     $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'asc';
-    //     $column = request()->input('sc');
-    //     $query = CartHeader::query()
-    //         ->leftjoin('UserAccount', 'CartHeader.user_id', 'UserAccount.id')
-    //         ->select('CartHeader.id', 'UserAccount.name as user_account_name')
-    //         ->orderBy($sort, $sortDirection);
-    //     if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-    //         abort(403);
-    //     }
-    //     if (request()->input('sw')) {
-    //         $search = request()->input('sw');
-    //         $operator = Util::getOperator(request()->input('so'));
-    //         if ($operator == 'like') {
-    //             $search = '%'.$search.'%';
-    //         }
-    //         $query->where($column, $operator, $search);
-    //     }
-    //     $cartHeaders = $query->paginate($size);
-    //     return view('cartHeaders.index', ['cartHeaders' => $cartHeaders]);
-    // }
-
+class CartHeaderController extends Controller
+{
     public function index()
     {
         $id = Auth::id();
@@ -51,7 +26,7 @@ class CartHeaderController extends Controller {
         $cartHeaderCartDetails = DB::table('CartHeader')
             ->join('CartDetail', 'CartHeader.id', 'CartDetail.cart_id')
             ->join('Dish', 'CartDetail.dish_id', 'Dish.id')
-            ->select('CartHeader.user_id as user_id','Dish.image as dish_image', 'Dish.name as dish_name', 'CartDetail.qty', 'Dish.price as dish_price', 'CartDetail.id')
+            ->select('CartHeader.user_id as user_id', 'Dish.image as dish_image', 'Dish.name as dish_name', 'CartDetail.qty', 'Dish.price as dish_price', 'CartDetail.id')
             ->where('CartHeader.user_id', $id)
             ->get();
         return view('cartHeaders.show', ['cartHeader' => $cartHeader, 'ref' => Util::getRef('/cartHeaders'), 'cartHeaderCartDetails' => $cartHeaderCartDetails]);
@@ -91,15 +66,21 @@ class CartHeaderController extends Controller {
 
     public function update($id)
     {
-        Util::setRef();
         $this->validate(request(), [
-            'user_id' => 'required'
+            'dish_id' => 'required',
+            'qty' => 'required'
         ]);
-        CartHeader::find($id)->update([
-            'user_id' => request()->input('user_id')
+
+        $cartDetail = CartDetail::find($id);
+        $cartDetail->update([
+            'cart_id' => request()->input('cart_id'),
+            'dish_id' => request()->input('dish_id'),
+            'qty' => request()->input('qty')
         ]);
-        return redirect(request()->query->get('ref'));
+
+        return back();
     }
+
 
     public function destroy($id)
     {

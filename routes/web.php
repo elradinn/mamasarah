@@ -12,14 +12,15 @@ use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\CartHeaderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerOrderController;
+use App\Http\Controllers\LandingController;
 
-Route::get('/', function () { return view('landing'); });
+Route::get('/', [LandingController::class, 'index']);
 
 Auth::routes();
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', [ SystemController::class, 'home' ]);
-    Route::get('/profile', [ SystemController::class, 'profile' ]);
-    Route::post('/updateProfile', [ SystemController::class, 'updateProfile' ]);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [SystemController::class, 'home']);
+    Route::get('/profile', [SystemController::class, 'profile']);
+    Route::post('/updateProfile', [SystemController::class, 'updateProfile']);
     Route::post('/add-to-cart', [BrowseDishController::class, 'addToCart'])->name('cart.add');
     Route::post('/proceed-order', [CartHeaderController::class, 'proceedToOrder'])->name('order.add');
     Route::post('/payment', [PaymentController::class, 'pay'])->name('payment.pay');
@@ -34,9 +35,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::middleware('role:USER')->resource('/cart', CartHeaderController::class);
     Route::middleware('role:USER')->resource('/orders', CustomerOrderController::class);
 });
-Route::get('/logout', [ LoginController::class, 'logout' ]);
-Route::get('/resetPassword', [ LoginController::class, 'resetPassword' ]);
-Route::post('/resetPassword', [ LoginController::class, 'resetPasswordPost' ]);
-Route::get('/changePassword/{token}', [ LoginController::class, 'changePassword' ]);
-Route::post('/changePassword/{token}', [ LoginController::class, 'changePasswordPost' ]);
-Route::get('/stack', [ SystemController::class, 'stack' ]);
+Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/resetPassword', [LoginController::class, 'resetPassword']);
+Route::post('/resetPassword', [LoginController::class, 'resetPasswordPost']);
+Route::get('/changePassword/{token}', [LoginController::class, 'changePassword']);
+Route::post('/changePassword/{token}', [LoginController::class, 'changePasswordPost']);
+Route::get('/stack', [SystemController::class, 'stack']);

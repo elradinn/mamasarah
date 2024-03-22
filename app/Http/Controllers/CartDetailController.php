@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Util;
 use App\Models\CartDetail;
 
-class CartDetailController extends Controller {
+class CartDetailController extends Controller
+{
 
     public function create()
     {
@@ -44,19 +45,11 @@ class CartDetailController extends Controller {
         return view('cartDetails.edit', ['cartDetail' => $cartDetail, 'ref' => Util::getRef('/cartDetails'), 'dishs' => $dishs]);
     }
 
-    public function update()
+    public function update($id)
     {
-        Util::setRef();
-        $this->validate(request(), [
-            'dish_id' => 'required',
-            'qty' => 'required'
-        ]);
-        CartDetail::find()->update([
-            'cart_id' => request()->input('cart_id'),
-            'dish_id' => request()->input('dish_id'),
-            'qty' => request()->input('qty')
-        ]);
-        return redirect(request()->query->get('ref'));
+        $cartDetail = CartDetail::find($id);
+
+        return back();
     }
 
     public function destroy($id)

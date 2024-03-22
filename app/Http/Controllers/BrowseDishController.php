@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Util;
 use App\Models\Dish;
-use App\Models\CartHeader;
 use App\Models\CartDetail;
 use Illuminate\Http\Request;
 
-class BrowseDishController extends Controller {
+class BrowseDishController extends Controller
+{
 
     public function index()
     {
         $browseDishs = Dish::query()
-        ->leftJoin('Category', 'Dish.category_id', '=', 'Category.id')
-        ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description')
-        ->get();
+            ->leftJoin('Category', 'Dish.category_id', '=', 'Category.id')
+            ->select('Dish.image', 'Dish.id', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description')
+            ->get();
         return view('browseDishs.index', ['browseDishs' => $browseDishs]);
     }
 
@@ -32,10 +31,11 @@ class BrowseDishController extends Controller {
         return view('browseDishs.show', ['browseDish' => $browseDish, 'ref' => Util::getRef('/browse-menu')]);
     }
 
-    public function addToCart(Request $request) {
+    public function addToCart(Request $request)
+    {
         $existingCartDetail = CartDetail::where('cart_id', Auth::id())
-        ->where('dish_id', $request->input('dish_id'))
-        ->first();
+            ->where('dish_id', $request->input('dish_id'))
+            ->first();
 
         if ($existingCartDetail) {
             // If the cart detail exists, increment the quantity
