@@ -39,6 +39,7 @@
                 <ul>
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#menu">Menu</a></li>
                     <li><a href="#events">Events</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#location">Location</a></li>
