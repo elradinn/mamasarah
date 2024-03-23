@@ -37,7 +37,7 @@
         <div class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Register</h2>
+                    <h2></h2>
                     <ol>
                         <li><a href="/">Home</a></li>
                         <li>Register</li>
@@ -73,7 +73,7 @@
                                     id="user_account_password" placeholder="Enter password" required />
                                 <input type="text" name="address" class="form-control mb-4" id="user_account_address"
                                     placeholder="Enter delivery address" required />
-                                <button class="registerButton w-100 mb-3">Register</button>
+                                <button class="registerButton w-100 mb-3">Create</button>
                                 <p class="text-center">
                                     Already have an account?
                                     <a href="/login"> Login </a>

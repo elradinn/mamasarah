@@ -40,7 +40,7 @@
         <div class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Login</h2>
+                    <h2></h2>
                     <ol>
                         <li><a href="/">Home</a></li>
                         <li>Login</li>
@@ -76,7 +76,7 @@
                                 <input id="user_account_password" name="password" class="form-control mb-4"
                                     value="{{ old('password') }}" type="password" required maxlength="100"
                                     placeholder="Enter password" />
-                                <button class="w-100 mb-3 button">Login</button>
+                                <button class="w-100 mb-3 button">Continue</button>
                                 <p class="text-center">
                                     Not registered?
                                     <a href="/register"> Create an account </a>
