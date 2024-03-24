@@ -24,7 +24,8 @@
                                     <h4>{{ $cartHeaderCartDetail->dish_name }}</h4>
                                     <p class="ingredients">
                                         Qty:
-                                    <form action="{{ route('cart.updateQuantity') }}" method="POST">
+                                    <form action="{{ route('cart.updateQuantity') }}" method="POST"
+                                        class="quantity-updater">
                                         @csrf
                                         <input type="hidden" name="cartDetail_id"
                                             value="{{ $cartHeaderCartDetail->id }}" />

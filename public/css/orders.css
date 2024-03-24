@@ -923,6 +923,33 @@ section {
   border-radius: 50px;
 }
 
+.quantity-updater {
+    align-items: center;
+}
+
+.quantity-updater input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.quantity-updater button {
+    padding: 5px 10px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.quantity-updater button:hover {
+    background-color: #638944;
+}
+
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
