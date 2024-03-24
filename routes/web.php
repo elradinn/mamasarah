@@ -37,8 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware('role:USER')->resource('/orders', CustomerOrderController::class);
 });
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::get('/resetPassword', [LoginController::class, 'resetPassword']);
-Route::post('/resetPassword', [LoginController::class, 'resetPasswordPost']);
-Route::get('/changePassword/{token}', [LoginController::class, 'changePassword']);
-Route::post('/changePassword/{token}', [LoginController::class, 'changePasswordPost']);
+Route::get('/reset-password', [LoginController::class, 'resetPassword']);
+Route::post('/reset-password', [LoginController::class, 'resetPasswordPost']);
+Route::get('/change-password/{token}', [LoginController::class, 'changePassword']);
+Route::post('/change-password/{token}', [LoginController::class, 'changePasswordPost']);
 Route::get('/stack', [SystemController::class, 'stack']);

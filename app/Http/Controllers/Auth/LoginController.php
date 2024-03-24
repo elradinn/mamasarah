@@ -83,7 +83,9 @@ class LoginController extends Controller
                 'password' => Hash::make(request()->input('password')),
                 'password_reset_token' => null,
             ]);
-            return view('auth.changePassword', ['success' => true, 'token' => $token]);
+            session()->flash('success', 'Password reset successful! Please log in.');
+            // return view('auth.changePassword', ['success' => true, 'token' => $token]);
+            return redirect('/login');
         } else {
             return view('auth.changePassword', ['error' => true, 'token' => $token]);
         }
