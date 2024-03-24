@@ -3,7 +3,7 @@
 Dear {{ $user }},
 
 You recently requested to reset the password for your account.
-Please tap the button below start the process.
+Please tap the button below to start the process.
 <br>
 <br>
 <br>
