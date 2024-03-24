@@ -18,7 +18,7 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['user','logout']]);
+        $this->middleware('guest', ['except' => ['user', 'logout']]);
     }
 
     protected function username()
@@ -28,7 +28,7 @@ class LoginController extends Controller
 
     protected function credentials()
     {
-        return [ $this->username() => request()->name, 'password' => request()->password, 'active' => 1 ];
+        return [$this->username() => request()->name, 'password' => request()->password, 'active' => 1];
     }
 
     protected function logout()
@@ -37,41 +37,43 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    protected function resetPassword() {
+    protected function resetPassword()
+    {
         return view('auth.resetPassword');
     }
 
-    protected function resetPasswordPost() {
+    protected function resetPasswordPost()
+    {
         $email = request()->input('email');
         $user = UserAccount::query()
-            ->select('UserAccount.id')
+            ->select('UserAccount.id', 'UserAccount.name')
             ->where('UserAccount.email', $email)
             ->first();
         if ($user) {
             $token = Str::random(40);
-            $user->update([ 'password_reset_token' => $token ]);
-            Util::sentMail('RESET', $email, $token);
-            return view('auth.resetPassword', [ 'success' => true ]);
-        }
-        else {
-            return view('auth.resetPassword', [ 'error' => true ]);
+            $user->update(['password_reset_token' => $token]);
+            Util::sentMail('RESET', $email, $token, $user->name);
+            return view('auth.resetPassword', ['success' => true]);
+        } else {
+            return view('auth.resetPassword', ['error' => true]);
         }
     }
 
-    protected function changePassword($token) {
+    protected function changePassword($token)
+    {
         $user = UserAccount::query()
             ->select('UserAccount.id')
             ->where('UserAccount.password_reset_token', $token)
             ->first();
         if ($user) {
-            return view('auth.changePassword', [ 'token' => $token ]);
-        }
-        else {
+            return view('auth.changePassword', ['token' => $token]);
+        } else {
             abort(404);
         }
     }
 
-    protected function changePasswordPost($token) {
+    protected function changePasswordPost($token)
+    {
         $user = UserAccount::query()
             ->select('UserAccount.id')
             ->where('UserAccount.password_reset_token', $token)
@@ -81,10 +83,9 @@ class LoginController extends Controller
                 'password' => Hash::make(request()->input('password')),
                 'password_reset_token' => null,
             ]);
-            return view('auth.changePassword', [ 'success' => true, 'token' => $token ]);
-        }
-        else {
-            return view('auth.changePassword', [ 'error' => true, 'token' => $token ]);
+            return view('auth.changePassword', ['success' => true, 'token' => $token]);
+        } else {
+            return view('auth.changePassword', ['error' => true, 'token' => $token]);
         }
     }
 

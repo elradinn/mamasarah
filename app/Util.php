@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Mail\ResetPasswordEmail;
 use Mail;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -46,17 +47,25 @@ class Util
 
     public static function sentMail($type, $email, $token, $user = null)
     {
-        $body = str_replace('{app_url}', env('APP_URL'), env("MAIL_$type"));
-        $body = str_replace('{app_name}', env('APP_NAME'), $body);
-        $body = str_replace('{token}', $token, $body);
-        if ($user) {
-            $body = str_replace('Alfred', $user, $body);
-        }
         $subject = ($type == 'WELCOME' ? 'Login Information' : ($type == 'RESET' ? 'Reset Password' : env('APP_NAME') . ' message'));
-        Mail::raw($body, function ($message) use ($type, $email, $subject) {
-            $message->from(env('MAIL_FROM_ADDRESS'))->to($email)->subject($subject);
-        });
+
+        Mail::to($email)->send(new ResetPasswordEMail($user, $token));
     }
+
+    // public static function sentMail($type, $email, $token, $user = null)
+    // {
+    //     $body = str_replace('{app_url}', env('APP_URL'), env("MAIL_$type"));
+    //     $body = str_replace('{app_name}', env('APP_NAME'), $body);
+    //     $body = str_replace('{token}', $token, $body);
+    //     if ($user) {
+    //         $body = str_replace('{user}', $user, $body);
+    //     }
+    //     $subject = ($type == 'WELCOME' ? 'Login Information' : ($type == 'RESET' ? 'Reset Password' : env('APP_NAME') . ' message'));
+    //     // Mail::raw($body, function ($message) use ($type, $email, $subject) {
+    //     //     $message->from(env('MAIL_FROM_ADDRESS'))->to($email)->subject($subject);
+    //     // });
+    //     Mail::to($email)->send(new ResetPasswordEmail($subject, $body));
+    // }
 
     // public static function sentMail($type, $email, $token, $user = null)
     // {
