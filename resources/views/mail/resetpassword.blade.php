@@ -7,11 +7,11 @@ Please tap the button below to start the process.
 <br>
 <br>
 <br>
-<a class="resetPasswordButton" href="{{ env('APP_URL') }}/change-password/{{ $token }}">Reset Password</a>
+<center><a class="resetPasswordButton" href="{{ env('APP_URL') }}/change-password/{{ $token }}">Reset Password</a></center>
 
 <br>
 <br>
-If that doesn't work, click this link:
+Alternatively, you can click this link:
 <br>
 <a href="{{ env('APP_URL') }}/change-password/{{ $token }}">{{ env('APP_URL') }}/change-password/{{ $token }}</a>
 <br>
