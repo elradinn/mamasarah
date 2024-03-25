@@ -76,16 +76,16 @@
                                 <input id="user_account_password" name="password" class="form-control mb-4"
                                     value="{{ old('password') }}" type="password" required maxlength="100"
                                     placeholder="Enter password" />
-                                <div class="w-100 text-start mb-4">
-                                    <p>
-                                        <a href="/reset-password"> Forgot Password? </a>
-                                    </p>
-                                </div>
                                 <button class="w-100 mb-3 button">Continue</button>
                                 <p class="text-center">
                                     Not registered?
                                     <a href="/register"> Create an account </a>
                                 </p>
+                                <div class="w-100 text-center mb-4">
+                                    <p>
+                                        <a href="/reset-password"> Forgot Password? </a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
