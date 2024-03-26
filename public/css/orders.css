@@ -808,11 +808,15 @@ section {
 /*--------------------------------------------------------------
 # Menu Section
 --------------------------------------------------------------*/
-.menu .nav-tabs {
+#orders {
+    height: 150vh;
+}
+
+.orders .nav-tabs {
   border: 0;
 }
 
-.menu .nav-link {
+.orders .nav-link {
   margin: 0 10px;
   padding: 10px 5px;
   transition: 0.3s;
@@ -825,18 +829,18 @@ section {
 }
 
 @media (max-width: 575px) {
-  .menu .nav-link {
+  .orders .nav-link {
     margin: 0 10px;
     padding: 10px 0;
   }
 }
 
-.menu .nav-link i {
+.orders .nav-link i {
   padding-right: 15px;
   font-size: 48px;
 }
 
-.menu .nav-link h4 {
+.orders .nav-link h4 {
   font-size: 18px;
   font-weight: 400;
   margin: 0;
@@ -844,48 +848,48 @@ section {
 }
 
 @media (max-width: 575px) {
-  .menu .nav-link h4 {
+  .orders .nav-link h4 {
     font-size: 16px;
   }
 }
 
-.menu .nav-link:hover {
+.orders .nav-link:hover {
   color: var(--color-primary);
 }
 
-.menu .nav-link.active {
+.orders .nav-link.active {
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-.menu .tab-content .tab-header {
+.orders .tab-content .tab-header {
   padding: 30px 0;
 }
 
-.menu .tab-content .tab-header p {
+.orders .tab-content .tab-header p {
   font-size: 14px;
   text-transform: uppercase;
   color: #676775;
   margin-bottom: 0;
 }
 
-.menu .tab-content .tab-header h3 {
+.orders .tab-content .tab-header h3 {
   font-size: 36px;
   font-weight: 600;
   color: var(--color-primary);
 }
 
-.menu .tab-content .menu-item {
+.orders .tab-content .orders-item {
   -moz-text-align-last: center;
   text-align-last: center;
 }
 
-.menu .tab-content .menu-item .menu-img {
+.orders .tab-content .orders-item .orders-img {
   padding: 0 60px;
   margin-bottom: 15px;
 }
 
-.menu .tab-content .menu-item h4 {
+.orders .tab-content .orders-item h4 {
   font-size: 22px;
   font-weight: 500;
   color: var(--color-secondary);
@@ -894,19 +898,19 @@ section {
   margin-bottom: 5px;
 }
 
-.menu .tab-content .menu-item .ingredients {
+.orders .tab-content .orders-item .ingredients {
   font-family: var(--font-secondary);
   color: #8d8d9b;
   margin-bottom: 5px;
 }
 
-.menu .tab-content .menu-item .price {
+.orders .tab-content .orders-item .price {
   font-size: 24px;
   font-weight: 700;
   color: var(--color-primary);
 }
 
-.menu .proceed-checkout-btn {
+.orders .proceed-checkout-btn {
   background: var(--color-primary);
   border: 0;
   padding: 14px 60px;
@@ -915,7 +919,7 @@ section {
   border-radius: 50px;
 }
 
-.menu .tab-content .menu-item .remove-order {
+.orders .tab-content .orders-item .remove-order {
   border: 1px solid var(--color-danger);
   padding: 14px 60px;
   color: var(--color-danger);

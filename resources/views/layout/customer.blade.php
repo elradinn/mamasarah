@@ -41,7 +41,8 @@
   <link href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet" />
 
   <!-- Template Main CSS File -->
-  <link href="{{ asset('css/menu.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/browse-menu.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/cart.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/orders.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/customer-profile.css') }}" rel="stylesheet" />
 </head>

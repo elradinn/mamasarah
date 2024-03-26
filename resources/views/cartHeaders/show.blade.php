@@ -1,6 +1,6 @@
 @extends('layout.customer')
 @section('content')
-    <section id="menu" class="menu">
+    <section id="cart" class="cart">
         <div class="container" data-aos="fade-up">
             <div class="section-header d-flex justify-content-between align-items-center">
                 <p>Your <span>Cart</span></p>
@@ -14,13 +14,13 @@
             </div>
             @if (count($cartHeaderCartDetails) > 0)
                 <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
-                    <div class="tab-pane fade active show" id="menu-starters">
+                    <div class="tab-pane fade active show" id="cart-starters">
                         <div class="row gy-5">
                             @foreach ($cartHeaderCartDetails as $cartHeaderCartDetail)
-                                <div class="col-lg-4 menu-item">
+                                <div class="col-lg-4 cart-item">
                                     <a href="/storage/dishs/{{ $cartHeaderCartDetail->dish_image }}" class="glightbox"><img
                                             src="/storage/dishs/{{ $cartHeaderCartDetail->dish_image }}"
-                                            class="menu-img img-fluid" alt="" /></a>
+                                            class="cart-img img-fluid" alt="" /></a>
                                     <h4>{{ $cartHeaderCartDetail->dish_name }}</h4>
                                     <p class="ingredients">
                                         Qty:
@@ -51,7 +51,7 @@
             @else
                 <div>
                     <h2>Your cart is empty</h2>
-                    <p>Check our delicious dishes on "Browse Dish" section!</p>
+                    <p>Check our delicious dishes on <a href="/browse-cart">Browse Dish</a> section!</p>
                 </div>
             @endif
 

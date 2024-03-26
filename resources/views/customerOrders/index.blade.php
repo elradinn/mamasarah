@@ -1,42 +1,19 @@
 @extends('layout.customer')
 @section('content')
+@php
+    $found = false;
+@endphp
+
+<section id="orders" class="orders">
 <div class="container">
+  <div class="section-header d-flex justify-content-between align-items-center">
+    <p>Your <span>Orders</span></p>
+  </div>
+  @foreach ($orderHeaders as $orderHeader)
+  @if ($orderHeader->user_id === auth()->user()->id)
   <div class="row">
     <div class="col">
       <div class="col-12"><input id="searchbar_toggle" type="checkbox" />
-        <div id="searchbar" class="form-row mb-4">
-          <div class="form-group col-lg-2">
-            <select id="search_col" onchange="searchChange()" class="form-control form-control-sm">
-              <option value="OrderHeader.id" data-type="number"
-                {{request()->input('sc') == 'OrderHeader.id' ? 'selected' : ''}}>Order Header Id</option>
-              <option value="OrderHeader.order_date" data-type="date"
-                {{request()->input('sc') == 'OrderHeader.order_date' ? 'selected' : ''}}>Order Header Order Date
-              </option>
-              <option value="UserAccount.address" {{request()->input('sc') == 'UserAccount.address' ? 'selected' : ''}}>
-                User Account Address</option>
-              <option value="Status.name" {{request()->input('sc') == 'Status.name' ? 'selected' : ''}}>Status Name
-              </option>
-            </select>
-          </div>
-          <div class="form-group col-lg-2">
-            <select id="search_oper" class="form-control form-control-sm">
-              <option value="c" {{request()->input('so') == 'c' ? 'selected' : ''}}>Contains</option>
-              <option value="e" {{request()->input('so') == 'e' ? 'selected' : ''}}>Equals</option>
-              <option value="g" {{request()->input('so') == 'g' ? 'selected' : ''}}>&gt;</option>
-              <option value="ge" {{request()->input('so') == 'ge' ? 'selected' : ''}}>&gt;&#x3D;</option>
-              <option value="l" {{request()->input('so') == 'l' ? 'selected' : ''}}>&lt;</option>
-              <option value="le" {{request()->input('so') == 'le' ? 'selected' : ''}}>&lt;&#x3D;</option>
-            </select>
-          </div>
-          <div class="form-group col-lg-2">
-            <input id="search_word" autocomplete="off" onkeyup="search(event)" value="{{request()->input('sw')}}"
-              class="form-control form-control-sm" />
-          </div>
-          <div class="col">
-            <button class="btn btn-success btn-sm" onclick="search()">Search</button>
-            <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
-          </div>
-        </div>
         <table class="table table-sm table-striped table-hover">
           <thead>
             <tr>
@@ -99,6 +76,18 @@
     }
     </style>
   </div>
+  @php
+    $found = true;
+  @endphp
+  @break
+  @endif
+  @endforeach
+  @if (!$found)
+
+  <div>
+    <p>Your don't have orders.</p>
+  </div>
+  @endif
 </div>
 </div>
 <script>
