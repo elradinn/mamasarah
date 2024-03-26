@@ -89,7 +89,7 @@
   </div>
   @endif
 </div>
-</div>
+</section>
 <script>
 initPage()
 </script>
