@@ -26,6 +26,7 @@
     <link href="/vendor/aos/aos.css" rel="stylesheet" />
     <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
@@ -53,7 +54,8 @@
         <section class="login">
             <div class="container" data-aos="fade-up">
                 <div class="section-header">
-                    <p><span>Login</span> Account</p>
+                    <h2>Welcome to</h2>
+                    <p><span>Mama Sarah's</span> Lettuce Garden</p>
                 </div>
 
                 <form action="/login" method="post" role="form" class="p-3 p-md-4 php-email-form">
@@ -72,10 +74,17 @@
                                     </div>
                                 @endif
                                 <input id="user_account_name" name="name" class="form-control mb-4"
-                                    value="{{ old('name') }}" required maxlength="50" placeholder="Enter username" />
-                                <input id="user_account_password" name="password" class="form-control mb-4"
-                                    value="{{ old('password') }}" type="password" required maxlength="100"
-                                    placeholder="Enter password" />
+                                       value="{{ old('name') }}" required maxlength="50" placeholder="Enter username" />
+                                <div class="input-group mb-4">
+                                    <input id="user_account_password" name="password" class="form-control"
+                                           value="{{ old('password') }}" type="password" required maxlength="100"
+                                           placeholder="Enter password" />
+                                    <div class="input-group-append">
+                                        <button id="togglePassword" class="password-eye h-100" tabindex="-1" type="button" onclick="togglePassword()">
+                                            <i id="eyeIcon" class="fa fa-eye-slash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <button class="w-100 mb-3 button">Continue</button>
                                 <p class="text-center">
                                     Not registered?
@@ -176,6 +185,23 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('/js/main.js') }}"></script>
+
+    <script>
+        const passwordInput = document.getElementById('user_account_password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
 </body>
 
 </html>
