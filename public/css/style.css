@@ -55,7 +55,7 @@ nav span {
 }
 select[readonly], .readonly {
     pointer-events: none;
-}  
+}
 
 /* Layout fix */
 
@@ -92,12 +92,12 @@ select[readonly], .readonly {
 
 /* Index page */
 
-#searchbar_toggle {
+/* #searchbar_toggle {
     display: none;
 }
 #searchbar {
     display: none;
-}
+} */
 @media (min-width: 992px) {
     #searchbar {
         display: flex;

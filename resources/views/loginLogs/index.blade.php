@@ -14,10 +14,6 @@
               <option value="LoginLog.login_time"
                 {{request()->input('sc') == 'LoginLog.login_time' ? 'selected' : ''}}>Login Time
               </option>
-              {{-- <option value="UserAccount.address" {{request()->input('sc') == 'UserAccount.address' ? 'selected' : ''}}>
-                User Account Address</option>
-              <option value="Status.name" {{request()->input('sc') == 'Status.name' ? 'selected' : ''}}>Status Name
-              </option> --}}
             </select>
           </div>
           <div class="form-group col-lg-2">

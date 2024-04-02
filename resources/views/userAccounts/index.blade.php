@@ -31,6 +31,9 @@
                         <button class="btn btn-success btn-sm" onclick="search()">Search</button>
                         <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
                     </div>
+                    <div class="col d-flex justify-content-end align-items-baseline">
+                        <a class="btn btn-sm btn-success" href="/userAccounts/create">Create</a>
+                    </div>
                 </div>
                 <table class="table table-sm table-striped table-hover">
                     <thead>
@@ -100,7 +103,6 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-sm btn-success" href="/userAccounts/create">Create</a>
             </div>
             <style>
                 #searchbar_toggle_menu { display: inline-flex!important }

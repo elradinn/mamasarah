@@ -7,16 +7,14 @@
         <div id="searchbar" class="form-row mb-4">
           <div class="form-group col-lg-2">
             <select id="search_col" onchange="searchChange()" class="form-control form-control-sm">
-              <option value="OrderHeader.id" data-type="number"
-                {{request()->input('sc') == 'OrderHeader.id' ? 'selected' : ''}}>Order Header Id</option>
               <option value="OrderHeader.order_date" data-type="date"
-                {{request()->input('sc') == 'OrderHeader.order_date' ? 'selected' : ''}}>Order Header Order Date
+                {{request()->input('sc') == 'OrderHeader.order_date' ? 'selected' : ''}}>Order Date
               </option>
               <option value="UserAccount.name" {{request()->input('sc') == 'UserAccount.name' ? 'selected' : ''}}>User
                 Account Name</option>
               <option value="UserAccount.address" {{request()->input('sc') == 'UserAccount.address' ? 'selected' : ''}}>
                 User Account Address</option>
-              <option value="Status.name" {{request()->input('sc') == 'Status.name' ? 'selected' : ''}}>Status Name
+              <option value="Status.name" {{request()->input('sc') == 'Status.name' ? 'selected' : ''}}>Status
               </option>
             </select>
           </div>
@@ -37,7 +35,10 @@
           <div class="col">
             <button class="btn btn-success btn-sm" onclick="search()">Search</button>
             <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
-          </div>
+        </div>
+        <div class="col d-flex justify-content-end align-items-baseline">
+            <a class="btn btn-sm btn-success" href="/orderHeaders/create">Create</a>
+        </div>
         </div>
         <table class="table table-sm table-striped table-hover">
           <thead>
@@ -111,7 +112,7 @@
                 <select id="page_index" onchange="location = this.value">
                   @for ($page = 1; $page <= $orderHeaders->lastPage(); $page++)
                     <option value="@getLink(page,orderHeaders,$page)"
-           
+
            {{$orderHeaders->currentPage() == $page ? 'selected' : ''}}>{{$page}}</option>
                     @endfor
                 </select>
@@ -127,7 +128,6 @@
             </div>
           </div>
         </div>
-        <a class="btn btn-sm btn-success" href="/orderHeaders/create">Create</a>
       </div>
       <style>
       #searchbar_toggle_menu {
