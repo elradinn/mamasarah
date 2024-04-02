@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Util;
 use App\Models\UserAccount;
 use App\Http\Controllers\Controller;
+use App\Models\LoginLog;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -93,6 +94,10 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        LoginLog::create([
+            'user_id' => $user->id
+        ]);
+
         if ($user->hasRole('ADMIN')) {
             return redirect('/home');
         } else if ($user->hasRole('USER')) {
