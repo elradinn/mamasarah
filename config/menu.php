@@ -8,5 +8,6 @@ return [
     [ 'title' => 'Cart', 'path' => 'cartHeaders', 'roles' => 'USER', 'show' => true ],
     [ 'title' => 'Categories', 'path' => 'categories', 'roles' => 'ADMIN', 'show' => true ],
     [ 'title' => 'Order Detail', 'path' => 'orderDetails', 'roles' => 'ADMIN', 'show' => false ],
-    [ 'title' => 'User Accounts', 'path' => 'userAccounts', 'roles' => 'ADMIN', 'show' => true ]
+    [ 'title' => 'User Accounts', 'path' => 'userAccounts', 'roles' => 'ADMIN', 'show' => true ],
+    [ 'title' => 'Login Logs', 'path' => 'login-logs', 'roles' => 'ADMIN', 'show' => true ]
 ];

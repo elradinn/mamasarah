@@ -13,6 +13,7 @@ use App\Http\Controllers\CartHeaderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LoginLogController;
 
 Route::get('/', [LandingController::class, 'index']);
 
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware('role:ADMIN')->resource('/orderDetails', OrderDetailController::class);
     Route::middleware('role:ADMIN')->resource('/dishs', DishController::class);
     Route::middleware('role:ADMIN')->resource('/categories', CategoryController::class);
+    Route::middleware('role:ADMIN')->resource('/login-logs', LoginLogController::class);
     Route::middleware('role:USER')->resource('/browse-menu', BrowseDishController::class);
     Route::middleware('role:USER')->resource('/cartDetails', CartDetailController::class);
     Route::middleware('role:USER')->resource('/cart', CartHeaderController::class);
