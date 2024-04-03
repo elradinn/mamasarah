@@ -666,6 +666,14 @@ section {
     background: #5b7f3e;
 }
 
+.register .php-email-form .password-eye {
+    background: #7e7d7d;
+    border: 0;
+    padding: 4px 16px;
+    color: #fff;
+    transition: 0.4s;
+}
+
 @keyframes animate-loading {
     0% {
         transform: rotate(0deg);

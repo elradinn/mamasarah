@@ -81,7 +81,7 @@
                                            placeholder="Enter password" />
                                     <div class="input-group-append">
                                         <button id="togglePassword" class="password-eye h-100" tabindex="-1" type="button" onclick="togglePassword()">
-                                            <i id="eyeIcon" class="fa fa-eye-slash"></i>
+                                            <i id="eyeIcon" class="bi bi-eye-slash"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -193,12 +193,12 @@
         document.getElementById('togglePassword').addEventListener('click', function() {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
+                eyeIcon.classList.remove('bi-eye-slash');
+                eyeIcon.classList.add('bi-eye');
             } else {
                 passwordInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
+                eyeIcon.classList.remove('bi-eye');
+                eyeIcon.classList.add('bi-eye-slash');
             }
         });
     </script>

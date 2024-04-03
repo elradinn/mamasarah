@@ -69,8 +69,19 @@
                                     placeholder="Enter username" required />
                                 <input type="text" name="email" class="form-control mb-4" id="user_account_email"
                                     placeholder="Enter email" required />
-                                <input type="password" name="password" class="form-control mb-4"
-                                    id="user_account_password" placeholder="Enter password" required />
+                                {{-- <input type="password" name="password" class="form-control mb-4"
+                                    id="user_account_password" placeholder="Enter password" required /> --}}
+                                <div class="input-group mb-4">
+                                    <input id="user_account_password" name="password" class="form-control"
+                                        value="{{ old('password') }}" type="password" required maxlength="100"
+                                        placeholder="Enter password" />
+                                    <div class="input-group-append">
+                                        <button id="togglePassword" class="password-eye h-100" tabindex="-1"
+                                            type="button" onclick="togglePassword()">
+                                            <i id="eyeIcon" class="bi bi-eye-slash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <input type="text" name="address" class="form-control mb-4" id="user_account_address"
                                     placeholder="Enter delivery address" required />
                                 <button class="registerButton w-100 mb-3">Create</button>
@@ -168,6 +179,23 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('/js/main.js') }}"></script>
+
+    <script>
+        const passwordInput = document.getElementById('user_account_password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('bi-eye-slash');
+                eyeIcon.classList.add('bi-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('bi-eye');
+                eyeIcon.classList.add('bi-eye-slash');
+            }
+        });
+    </script>
 </body>
 
 </html>
