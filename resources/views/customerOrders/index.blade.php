@@ -37,11 +37,10 @@
               <td>{{$orderHeader->user_account_address}}</td>
               <td>{{$orderHeader->status_name}}</td>
               <td class="text-center">
-                <form action="/orders/{{$orderHeader->id}}" method="POST">
-                  @method("DELETE")
+                <form action="{{ route('payment.refund') }}" method="POST">
                   @csrf
-                  <a class="btn btn-sm btn-danger" href="#!" onclick="deleteItem(this)" title="Delete"><i
-                      class="fa fa-times"></i></a>
+                  <input type="hidden" name="order_item" value="{{ json_encode($orderHeader) }}">
+                  <button class="btn btn-danger" onclick="deleteItem(this)" type="submit">Cancel</button>
                 </form>
               </td>
             </tr>

@@ -7,6 +7,7 @@ use Curl;
 use App\Models\CartDetail;
 use App\Models\OrderDetail;
 use App\Models\CartHeader;
+use App\Models\Dish;
 use App\Models\OrderHeader;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,7 +76,7 @@ class PaymentController extends Controller
 
         // Create order header
         $orderHeader = new OrderHeader();
-        $orderHeader->id = $response->data->attributes->payments[0]->id;
+        $orderHeader->paymongo_id = $response->data->attributes->payments[0]->id;
         $orderHeader->user_id = $cartHeader->user_id;
         $orderHeader->status_id = 3; // Dispatch default
         $orderHeader->order_date = date('Y-m-d H:i:s');
@@ -129,9 +130,25 @@ class PaymentController extends Controller
     public function refund(Request $request)
     {
 
-        $data['data']['attributes']['amount']       = 10 * 100;
-        $data['data']['attributes']['payment_id']   = 'pay_CSxML1uBrmELdtTro6BJiJTG';
-        $data['data']['attributes']['reason']       = 'duplicate';
+        $orderItem = json_decode($request->input('order_item'));
+
+        $orderDetails = OrderDetail::where('order_id', $orderItem->id)->get();
+
+        $totalRefundAmount = 0;
+
+        foreach ($orderDetails as $orderDetail) {
+            // Fetch the Dish model using the dish_id
+            $dish = Dish::find($orderDetail->dish_id);
+
+            // Add the price of the dish to the total refund amount
+            $totalRefundAmount += $dish->price * $orderDetail->qty;
+        }
+
+        $data['data']['attributes']['amount']       = $totalRefundAmount;
+        $data['data']['attributes']['payment_id']   = $orderItem->paymongo_id;
+        $data['data']['attributes']['reason']       = 'Cancel order';
+
+        dd($data);
 
         $response = Curl::to('https://api.paymongo.com/refunds')
             ->withHeader('Content-Type: application/json')

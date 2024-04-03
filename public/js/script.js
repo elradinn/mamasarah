@@ -127,7 +127,7 @@ function searchChange() {
 }
 
 function deleteItem(e) {
-    if (confirm('Delete this item?')) {
+    if (confirm('Cancel this order?')) {
         e.parentNode.submit()
     }
 }
