@@ -15,25 +15,25 @@ class DishController extends Controller {
         $size = request()->input('size') ? request()->input('size') : 10;
         $sort = request()->input('sort') ? request()->input('sort') : 'Category.name';
         $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'asc';
-        $column = request()->input('sc');
         $query = Dish::query()
             ->leftjoin('Category', 'Dish.category_id', 'Category.id')
-            ->select('Dish.image', 'Dish.name', 'Dish.price', 'Category.name as category_name', 'Dish.description', 'Dish.id')
+            ->select('Dish.*', 'Category.name as category_name')
             ->orderBy($sort, $sortDirection);
-        if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-            abort(403);
-        }
         if (request()->input('sw')) {
             $search = request()->input('sw');
-            $operator = Util::getOperator(request()->input('so'));
-            if ($operator == 'like') {
-                $search = '%'.$search.'%';
-            }
-            $query->where($column, $operator, $search);
+            $query->where(function ($query) use ($search) {
+                $query->where('Dish.image', 'like', '%' . $search . '%')
+                      ->orWhere('Dish.name', 'like', '%' . $search . '%')
+                      ->orWhere('Dish.price', 'like', '%' . $search . '%')
+                      ->orWhere('Category.name', 'like', '%' . $search . '%')
+                      ->orWhere('Dish.description', 'like', '%' . $search . '%')
+                      ->orWhere('Dish.id', 'like', '%' . $search . '%');
+            });
         }
         $dishs = $query->paginate($size);
         return view('dishs.index', ['dishs' => $dishs]);
     }
+
 
     public function create()
     {
