@@ -19,16 +19,12 @@ class CategoryController extends Controller {
         $query = Category::query()
             ->select('Category.id', 'Category.name')
             ->orderBy($sort, $sortDirection);
-        if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-            abort(403);
-        }
         if (request()->input('sw')) {
             $search = request()->input('sw');
-            $operator = Util::getOperator(request()->input('so'));
-            if ($operator == 'like') {
-                $search = '%'.$search.'%';
-            }
-            $query->where($column, $operator, $search);
+            $query->where(function ($query) use ($search) {
+                $query->where('Category.id', 'like', '%' . $search . '%')
+                      ->orWhere('Category.name', 'like', '%' . $search . '%');
+            });
         }
         $categories = $query->paginate($size);
         return view('categories.index', ['categories' => $categories]);

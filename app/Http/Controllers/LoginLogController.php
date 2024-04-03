@@ -16,26 +16,19 @@ class LoginLogController extends Controller
     {
         $size = request()->input('size') ? request()->input('size') : 10;
         $sort = request()->input('sort') ? request()->input('sort') : 'LoginLog.id';
-        $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'asc';
+        $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'desc';
         $column = request()->input('sc');
         $query = LoginLog::query()
             ->leftjoin('UserAccount', 'LoginLog.user_id', 'UserAccount.id')
             ->select('LoginLog.id', 'UserAccount.name as user_account_name', 'LoginLog.login_time as user_login_time')
             ->orderBy($sort, $sortDirection);
-        if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-            abort(403);
-        }
-        if (request()->input('sw')) {
-            $search = request()->input('sw');
-            $operator = Util::getOperator(request()->input('so'));
-            if ($column == 'OrderHeader.order_date') {
-                $search = Util::formatDateStr($search, 'date');
+            if (request()->input('sw')) {
+                $search = request()->input('sw');
+                $query->where(function ($query) use ($search) {
+                    $query->where('LoginLog.id', 'like', '%' . $search . '%')
+                          ->orWhere('LoginLog.login_time', 'like', '%' . $search . '%');
+                });
             }
-            if ($operator == 'like') {
-                $search = '%'.$search.'%';
-            }
-            $query->where($column, $operator, $search);
-        }
         $loginLogs = $query->paginate($size);
         return view('loginLogs.index', ['loginLogs' => $loginLogs]);
     }

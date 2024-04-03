@@ -21,16 +21,15 @@ class UserAccountController extends Controller {
         $query = UserAccount::query()
             ->select('UserAccount.id', 'UserAccount.name', 'UserAccount.email', 'UserAccount.active', 'UserAccount.address')
             ->orderBy($sort, $sortDirection);
-        if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-            abort(403);
-        }
         if (request()->input('sw')) {
             $search = request()->input('sw');
-            $operator = Util::getOperator(request()->input('so'));
-            if ($operator == 'like') {
-                $search = '%'.$search.'%';
-            }
-            $query->where($column, $operator, $search);
+            $query->where(function ($query) use ($search) {
+                $query->where('UserAccount.id', 'like', '%' . $search . '%')
+                      ->orWhere('UserAccount.name', 'like', '%' . $search . '%')
+                      ->orWhere('UserAccount.email', 'like', '%' . $search . '%')
+                      ->orWhere('UserAccount.address', 'like', '%' . $search . '%')
+                      ->orWhere('UserAccount.active', 'like', '%' . $search . '%');
+            });
         }
         $userAccounts = $query->paginate($size);
         return view('userAccounts.index', ['userAccounts' => $userAccounts]);

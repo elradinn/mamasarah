@@ -3,27 +3,11 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div class="col-12"><input id="searchbar_toggle" type="checkbox" />
+      <div class="col-12">
         <div id="searchbar" class="form-row mb-4">
-          <div class="form-group col-lg-2">
-            <select id="search_col" onchange="searchChange()" class="form-control form-control-sm">
-              <option value="Category.id" data-type="number"
-                {{request()->input('sc') == 'Category.id' ? 'selected' : ''}}>Category</option>
-              <option value="Category.name" {{request()->input('sc') == 'Category.name' ? 'selected' : ''}}>Category
-                Name</option>
-            </select>
-          </div>
-          <div class="form-group col-lg-2">
-            <select id="search_oper" class="form-control form-control-sm">
-              <option value="c" {{request()->input('so') == 'c' ? 'selected' : ''}}>Contains</option>
-              <option value="e" {{request()->input('so') == 'e' ? 'selected' : ''}}>Equals</option>
-              <option value="g" {{request()->input('so') == 'g' ? 'selected' : ''}}>&gt;</option>
-              <option value="ge" {{request()->input('so') == 'ge' ? 'selected' : ''}}>&gt;&#x3D;</option>
-              <option value="l" {{request()->input('so') == 'l' ? 'selected' : ''}}>&lt;</option>
-              <option value="le" {{request()->input('so') == 'le' ? 'selected' : ''}}>&lt;&#x3D;</option>
-            </select>
-          </div>
-          <div class="form-group col-lg-2">
+          <input type="hidden" id="search_col" value="Category.search">
+          <input type="hidden" id="search_oper" value="c">
+          <div class="form-group col">
             <input id="search_word" autocomplete="off" onkeyup="search(event)" value="{{request()->input('sw')}}"
               class="form-control form-control-sm" />
           </div>

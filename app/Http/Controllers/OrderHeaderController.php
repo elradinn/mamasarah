@@ -21,19 +21,14 @@ class OrderHeaderController extends Controller {
             ->leftjoin('Status', 'OrderHeader.status_id', 'Status.id')
             ->select('OrderHeader.id', 'OrderHeader.order_date', 'UserAccount.name as user_account_name', 'UserAccount.address as user_account_address', 'Status.name as status_name')
             ->orderBy($sort, $sortDirection);
-        if (Util::IsInvalidSearch($query->getQuery()->columns, $column)) {
-            abort(403);
-        }
         if (request()->input('sw')) {
             $search = request()->input('sw');
-            $operator = Util::getOperator(request()->input('so'));
-            if ($column == 'OrderHeader.order_date') {
-                $search = Util::formatDateStr($search, 'date');
-            }
-            if ($operator == 'like') {
-                $search = '%'.$search.'%';
-            }
-            $query->where($column, $operator, $search);
+            $query->where(function ($query) use ($search) {
+                $query->where('OrderHeader.order_date', 'like', '%' . $search . '%')
+                      ->orWhere('UserAccount.name', 'like', '%' . $search . '%')
+                      ->orWhere('UserAccount.address', 'like', '%' . $search . '%')
+                      ->orWhere('Status.name', 'like', '%' . $search . '%');
+            });
         }
         $orderHeaders = $query->paginate($size);
         return view('orderHeaders.index', ['orderHeaders' => $orderHeaders]);

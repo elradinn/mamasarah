@@ -3,28 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="col-12"><input id="searchbar_toggle" type="checkbox" />
+            <div class="col-12">
+                <input type="hidden" id="search_col" value="UserAccount.search">
+                <input type="hidden" id="search_oper" value="c">
                 <div id="searchbar" class="form-row mb-4">
-                    <div class="form-group col-lg-2">
-                        <select id="search_col" onchange="searchChange()" class="form-control form-control-sm">
-                            <option value="UserAccount.id" data-type="number" {{request()->input('sc') == 'UserAccount.id' ? 'selected' : ''}}>User Account Id</option>
-                            <option value="UserAccount.name" {{request()->input('sc') == 'UserAccount.name' ? 'selected' : ''}}>User Account Name</option>
-                            <option value="UserAccount.email" {{request()->input('sc') == 'UserAccount.email' ? 'selected' : ''}}>User Account Email</option>
-                            <option value="UserAccount.active" {{request()->input('sc') == 'UserAccount.active' ? 'selected' : ''}}>User Account Active</option>
-                            <option value="UserAccount.address" {{request()->input('sc') == 'UserAccount.address' ? 'selected' : ''}}>User Account Address</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-2">
-                        <select id="search_oper" class="form-control form-control-sm">
-                            <option value="c" {{request()->input('so') == 'c' ? 'selected' : ''}}>Contains</option>
-                            <option value="e" {{request()->input('so') == 'e' ? 'selected' : ''}}>Equals</option>
-                            <option value="g" {{request()->input('so') == 'g' ? 'selected' : ''}}>&gt;</option>
-                            <option value="ge" {{request()->input('so') == 'ge' ? 'selected' : ''}}>&gt;&#x3D;</option>
-                            <option value="l" {{request()->input('so') == 'l' ? 'selected' : ''}}>&lt;</option>
-                            <option value="le" {{request()->input('so') == 'le' ? 'selected' : ''}}>&lt;&#x3D;</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-2">
+                    <div class="form-group col">
                         <input id="search_word" autocomplete="off" onkeyup="search(event)" value="{{request()->input('sw')}}" class="form-control form-control-sm" />
                     </div>
                     <div class="col">
