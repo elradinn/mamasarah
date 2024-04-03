@@ -75,6 +75,7 @@ class PaymentController extends Controller
 
         // Create order header
         $orderHeader = new OrderHeader();
+        $orderHeader->id = $response->data->attributes->payments[0]->id;
         $orderHeader->user_id = $cartHeader->user_id;
         $orderHeader->status_id = 3; // Dispatch default
         $orderHeader->order_date = date('Y-m-d H:i:s');
@@ -125,11 +126,11 @@ class PaymentController extends Controller
     }
 
 
-    public function refund()
+    public function refund(Request $request)
     {
 
-        $data['data']['attributes']['amount']       = 5000;
-        $data['data']['attributes']['payment_id']   = 'pay_sA83KrtmJUdue8prEHD6rZrY';
+        $data['data']['attributes']['amount']       = 10 * 100;
+        $data['data']['attributes']['payment_id']   = 'pay_CSxML1uBrmELdtTro6BJiJTG';
         $data['data']['attributes']['reason']       = 'duplicate';
 
         $response = Curl::to('https://api.paymongo.com/refunds')
