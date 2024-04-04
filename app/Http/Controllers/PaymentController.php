@@ -164,7 +164,12 @@ class PaymentController extends Controller
         }
 
         session()->flash('success', 'Order cancelled successfully');
-        return redirect('/orders');
+
+        if (Auth::id() != 1) {
+            return redirect('/orders');
+        } else {
+            return redirect ('/orderHeaders');
+        }
     }
 
     public function refundStatus($id)

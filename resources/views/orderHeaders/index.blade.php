@@ -43,17 +43,19 @@
               <td>{{$orderHeader->user_account_name}}</td>
               <td>{{$orderHeader->user_account_address}}</td>
               <td>{{$orderHeader->status_name}}</td>
-              <td class="text-center">
+              <td>
                 <a class="btn btn-sm btn-secondary" href="/orderHeaders/{{$orderHeader->id}}" title="View"><i
                     class="fa fa-eye"></i></a>
                 <a class="btn btn-sm btn-success" href="/orderHeaders/{{$orderHeader->id}}/edit" title="Edit"><i
                     class="fa fa-pencil"></i></a>
-                <form action="/orderHeaders/{{$orderHeader->id}}" method="POST">
-                  @method("DELETE")
-                  @csrf
-                  <a class="btn btn-sm btn-danger" href="#!" onclick="deleteItem(this)" title="Delete"><i
-                      class="fa fa-times"></i></a>
+                @if ($orderHeader->status_name != 'Cancelled')
+                <form action="{{ route('payment.refund') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="order_item" value="{{ json_encode($orderHeader) }}">
+                    <button class="btn btn-sm btn-danger" onclick="deleteItem(this)" type="submit" title="Cancel"><i
+                        class="fa fa-times"></i></button>
                 </form>
+                @endif
               </td>
             </tr>
             @endforeach

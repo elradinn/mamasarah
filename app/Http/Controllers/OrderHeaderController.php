@@ -19,7 +19,7 @@ class OrderHeaderController extends Controller {
         $query = OrderHeader::query()
             ->leftjoin('UserAccount', 'OrderHeader.user_id', 'UserAccount.id')
             ->leftjoin('Status', 'OrderHeader.status_id', 'Status.id')
-            ->select('OrderHeader.id', 'OrderHeader.order_date', 'UserAccount.name as user_account_name', 'UserAccount.address as user_account_address', 'Status.name as status_name')
+            ->select('OrderHeader.id', 'OrderHeader.order_date', 'UserAccount.name as user_account_name', 'UserAccount.address as user_account_address', 'Status.name as status_name', 'OrderHeader.paymongo_id as order_paymongo_id')
             ->orderBy($sort, $sortDirection);
         if (request()->input('sw')) {
             $search = request()->input('sw');
