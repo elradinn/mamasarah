@@ -52,7 +52,7 @@
                 <form action="{{ route('payment.refund') }}" method="POST">
                     @csrf
                     <input type="hidden" name="order_item" value="{{ json_encode($orderHeader) }}">
-                    <button class="btn btn-sm btn-danger" onclick="deleteItem(this)" type="submit" title="Cancel"><i
+                    <button class="btn btn-sm btn-danger" onclick="cancelOrder(this)" type="submit" title="Cancel"><i
                         class="fa fa-times"></i></button>
                 </form>
                 @endif
