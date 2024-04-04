@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/payment', [PaymentController::class, 'pay'])->name('payment.pay');
     Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
     Route::post('/refund', [PaymentController::class, 'refund'])->name('payment.refund');
+    Route::post('/refund-specific-dish', [PaymentController::class, 'refundSpecificDish'])->name('payment.refundSpecificDish');
     Route::middleware('role:ADMIN')->resource('/userAccounts', UserAccountController::class);
     Route::middleware('role:ADMIN')->resource('/orderHeaders', OrderHeaderController::class);
     Route::middleware('role:ADMIN')->resource('/orderDetails', OrderDetailController::class);

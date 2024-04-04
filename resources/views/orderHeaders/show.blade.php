@@ -47,11 +47,11 @@
                   <td class="text-center">
                     <a class="btn btn-sm btn-success" href="/orderDetails/{{$orderHeaderOrderDetail->id}}/edit"
                       title="Edit"><i class="fa fa-pencil"></i></a>
-                    <form action="/orderDetails/{{$orderHeaderOrderDetail->id}}" method="POST">
-                      @method("DELETE")
-                      @csrf
-                      <a class="btn btn-sm btn-danger" href="#!" onclick="deleteItem(this)" title="Delete"><i
-                          class="fa fa-times"></i></a>
+                    <form action="{{ route('payment.refundSpecificDish') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="order_item" value="{{ json_encode($orderHeaderOrderDetail) }}">
+                        <button class="btn btn-sm btn-danger" onclick="deleteItem(this)" type="submit" title="Cancel"><i
+                            class="fa fa-times"></i></button>
                     </form>
                   </td>
                 </tr>

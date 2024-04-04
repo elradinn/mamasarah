@@ -14,7 +14,7 @@ class OrderHeaderController extends Controller {
     {
         $size = request()->input('size') ? request()->input('size') : 10;
         $sort = request()->input('sort') ? request()->input('sort') : 'OrderHeader.id';
-        $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'asc';
+        $sortDirection = request()->input('sort') ? (request()->input('desc') ? 'desc' : 'asc') : 'desc';
         $column = request()->input('sc');
         $query = OrderHeader::query()
             ->leftjoin('UserAccount', 'OrderHeader.user_id', 'UserAccount.id')
@@ -66,7 +66,7 @@ class OrderHeaderController extends Controller {
         $orderHeaderOrderDetails = DB::table('OrderHeader')
             ->join('OrderDetail', 'OrderHeader.id', 'OrderDetail.order_id')
             ->join('Dish', 'OrderDetail.dish_id', 'Dish.id')
-            ->select('Dish.image as dish_image', 'Dish.name as dish_name', 'OrderDetail.qty', 'Dish.price as dish_price', 'OrderDetail.remarks', 'OrderDetail.id')
+            ->select('Dish.image as dish_image', 'Dish.name as dish_name', 'OrderDetail.order_id', 'OrderDetail.qty', 'Dish.price as dish_price', 'OrderDetail.remarks', 'OrderDetail.id')
             ->where('OrderHeader.id', $id)
             ->get();
         return view('orderHeaders.show', ['orderHeader' => $orderHeader, 'ref' => Util::getRef('/orderHeaders'), 'orderHeaderOrderDetails' => $orderHeaderOrderDetails]);

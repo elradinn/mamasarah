@@ -77,6 +77,7 @@ class PaymentController extends Controller
         // Create order header
         $orderHeader = new OrderHeader();
         $orderHeader->paymongo_id = $response->data->attributes->payments[0]->id;
+        // $orderHeader->paymongo_id = '12345';
         $orderHeader->user_id = $cartHeader->user_id;
         $orderHeader->status_id = 3; // Dispatch default
         $orderHeader->order_date = date('Y-m-d H:i:s');
@@ -170,6 +171,36 @@ class PaymentController extends Controller
         } else {
             return redirect ('/orderHeaders');
         }
+    }
+
+    public function refundSpecificDish(Request $request)
+    {
+
+        $orderItem = json_decode($request->input('order_item'));
+
+        $orderHeaderId = OrderHeader::where('id', $orderItem->order_id)->pluck('id')->first();
+        $paymongoId = OrderHeader::where('id', $orderItem->order_id)->pluck('paymongo_id')->first();
+
+        $totalRefundAmount = $orderItem->dish_price * $orderItem->qty;
+
+        $data['data']['attributes']['amount']       = $totalRefundAmount * 100;
+        $data['data']['attributes']['payment_id']   = $paymongoId;
+        $data['data']['attributes']['reason']       = 'requested_by_customer';
+        $data['data']['attributes']['notes']       = 'Cancelled order';
+
+        $response = Curl::to('https://api.paymongo.com/refunds')
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->withData($data)
+            ->asJson()
+            ->post();
+
+
+        OrderDetail::find($orderItem->id)->delete();
+
+        session()->flash('success', 'Order item cancelled successfully');
+        return redirect ('/orderHeaders/' . $orderHeaderId);
     }
 
     public function refundStatus($id)
