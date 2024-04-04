@@ -85,7 +85,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <button class="w-100 mb-3 button">Continue</button>
+                                <button class="w-100 mb-3 button">Login</button>
                                 <p class="text-center">
                                     Not registered?
                                     <a href="/register"> Create an account </a>
