@@ -65,7 +65,7 @@
                             <div class="col-md-6 text-center">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
-                                        These email/password do not match our records.
+                                        These email/password is incorrect.
                                     </div>
                                 @endif
                                 @if (session('success'))
