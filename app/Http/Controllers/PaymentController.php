@@ -144,11 +144,10 @@ class PaymentController extends Controller
             $totalRefundAmount += $dish->price * $orderDetail->qty;
         }
 
-        $data['data']['attributes']['amount']       = $totalRefundAmount;
-        $data['data']['attributes']['payment_id']   = $orderItem->paymongo_id;
-        $data['data']['attributes']['reason']       = 'Cancel order';
-
-        dd($data);
+        $data['data']['attributes']['amount']       = $totalRefundAmount * 100;
+        $data['data']['attributes']['payment_id']   = $orderItem->order_paymongo_id;
+        $data['data']['attributes']['reason']       = 'requested_by_customer';
+        $data['data']['attributes']['notes']       = 'Cancelled order';
 
         $response = Curl::to('https://api.paymongo.com/refunds')
             ->withHeader('Content-Type: application/json')
@@ -158,7 +157,14 @@ class PaymentController extends Controller
             ->asJson()
             ->post();
 
-        dd($response);
+        $orderHeader = OrderHeader::find($orderItem->id);
+        if ($orderHeader) {
+            $orderHeader->status_id = 2;
+            $orderHeader->save();
+        }
+
+        session()->flash('success', 'Order cancelled successfully');
+        return redirect('/orders');
     }
 
     public function refundStatus($id)

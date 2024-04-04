@@ -13,17 +13,27 @@
   @if ($orderHeader->user_id === auth()->user()->id)
   <div class="row">
     <div class="col">
-      <div class="col-12"><input id="searchbar_toggle" type="checkbox" />
+      <div class="col-12">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            {{ $errors->first() }}
+        </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <table class="table table-sm table-striped table-hover">
           <thead>
             <tr>
-              <th class="@getSortClass(OrderHeader.id,asc)"><a
-                  href="@getLink(sort,orderHeaders,OrderHeader.id,asc)">Id</a></th>
+              <th class="@getSortClass(OrderHeader.id,desc)"><a
+                  href="@getLink(sort,orderHeaders,OrderHeader.id,desc)">Id</a></th>
               <th class="@getSortClass(OrderHeader.order_date)"><a
                   href="@getLink(sort,orderHeaders,OrderHeader.order_date)">Order Date</a></th>
               <th class="@getSortClass(UserAccount.address)"><a
                   href="@getLink(sort,orderHeaders,UserAccount.address)">Address</a></th>
-              <th class="@getSortClass(Status.name)"><a href="@getLink(sort,orderHeaders,Status.name)">Status Name</a>
+              <th class="@getSortClass(Status.name)"><a href="@getLink(sort,orderHeaders,Status.name)">Status</a>
               </th>
               <th>Actions</th>
             </tr>
@@ -36,12 +46,14 @@
               <td class="text-center">{{$orderHeader->order_date}}</td>
               <td>{{$orderHeader->user_account_address}}</td>
               <td>{{$orderHeader->status_name}}</td>
-              <td class="text-center">
+              <td>
+                @if ($orderHeader->status_name != 'Cancelled')
                 <form action="{{ route('payment.refund') }}" method="POST">
                   @csrf
                   <input type="hidden" name="order_item" value="{{ json_encode($orderHeader) }}">
                   <button class="btn btn-danger" onclick="deleteItem(this)" type="submit">Cancel</button>
                 </form>
+                @endif
               </td>
             </tr>
             @endif
